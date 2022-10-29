@@ -1,5 +1,9 @@
 {% extends "layout.html" %}
 
+{% block titlePage %}
+{{ titlePage }}
+{% endblock titlePage %}
+
 {% block searchBox %}
 <form class="d-flex" role="search" action="/novela" method="POST">
     <input class="form-control me-2" type="search" name="id" placeholder="Buscar" aria-label="Search">

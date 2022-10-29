@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Index</title>
+	<link rel="stylesheet" id="estilo" href="{{ url_for('static', filename='css/bootstrap.min.quartz.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+	<nav class="navbar navbar-dark container-md bg-dark">
+		<div class="container-fluid">
+		  <a class="navbar-brand text-light" href="#">Biblioteca</a>
+		  <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+			  <li class="nav-item">
+				<button class="btn btn-primary" onclick="changeStyle(1)">Bootstrap Principal</button>
+			  </li>
+			  <li class="nav-item">
+				<button class="btn btn-dark" onclick="changeStyle(2)">Bootstrap Dark</button>
+			  </li>
+			  <li class="nav-item">
+				<button class="btn btn-success" onclick="changeStyle(3)">Bootstrap Neon</button>
+			  </li>
+			  <li class="nav-item">
+				<button class="btn btn-danger" onclick="changeStyle(4)">Bootstrap Quart</button>
+			  </li>
+			</ul>
+		  </div>
+		</div>
+	  </nav>
+
+	{% block body %}
+	{% endblock %}
+
+	<script src="{{ url_for('static', filename='js/bootstrap.bundle.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

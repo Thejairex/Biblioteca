@@ -1,5 +1,12 @@
 {% extends "layout.html" %}
 
+{% block searchBox %}
+<form class="d-flex" role="search" action="/anime" method="POST">
+    <input class="form-control me-2" type="search" name="id" placeholder="Buscar" aria-label="Search">
+    <button class="btn btn-outline-success" type="submit">Buscar</button>
+</form>
+{% endblock searchBox %}
+
 {% block body %}
 
 <div class="container-md px-3 bg-dark h-100 text-center text-light ">

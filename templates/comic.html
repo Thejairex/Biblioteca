@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block searchBox %}
-<form class="d-flex" role="search" action="/novela" method="POST">
+<form class="d-flex" role="search" action="/{{serie}}" method="POST">
     <input class="form-control me-2" type="search" name="id" placeholder="Buscar" aria-label="Search">
     <button class="btn btn-outline-success" type="submit">Buscar</button>
 </form>
@@ -10,7 +10,7 @@
 {% block body %}
 
 <div class="container-md px-3 bg-dark h-100 text-center text-light ">
-    <h2>Lista de Novelas</h2>
+    <h2>Lista de {{titulo}}</h2>
     <div class=" tabla fixTableHead">
         <table class="table table-striped">
             <thead class="bg-primary">
@@ -21,15 +21,13 @@
                 <th class="bg-primary">Tipo</th>
             </thead>
             <tbody>
-                {% for data in datas%}
-                    <tr>
-                        <td>{{data[0]}}</td>
-                        <td>{{data[1]}}</td>
-                        <td>{{data[2]}}</td>
-                        <td>{{data[3]}}</td>
-                        <td>{{data[4]}}</td>
-                    </tr>
-                {% endfor %}
+                <tr>
+                    <td>{{datas[0]}}</td>
+                    <td>{{datas[1]}}</td>
+                    <td>{{datas[2]}}</td>
+                    <td>{{datas[3]}}</td>
+                    <td>{{datas[4]}}</td>
+                </tr>
             </tbody>
         </table>
     </div>

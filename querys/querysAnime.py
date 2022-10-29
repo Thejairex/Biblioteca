@@ -13,3 +13,14 @@ class qAnime():
             return data
         except Exception as e:
             return f"No Recibido {e}"
+
+    @classmethod
+    def fetchone_anime(self, id):
+        try:
+            cur = mysql.connection.cursor()
+            query = "SELECT * FROM anime WHERE id_anime= {}".format(id)
+            cur.execute(query)
+            data = cur.fetchone()
+            return data
+        except Exception as e:
+            return f"No Recibido {e}"

@@ -1,3 +1,36 @@
-/* body {
-    height: 100vh;
-} */
+.tabla {
+    max-height: 93.5vh;
+}
+
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 50px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.tabla::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+.tabla::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 50px;
+  }
+  
+.tabla::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+.fixTableHead {
+  overflow-y: auto;
+}
+.fixTableHead thead th {
+  position: sticky;
+  top: 0;
+}

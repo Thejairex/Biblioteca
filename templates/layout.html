@@ -4,13 +4,17 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Index</title>
-	<link rel="stylesheet" id="estilo" href="{{ url_for('static', filename='css/bootstrap.min.quartz.css') }}">
+	<link rel="stylesheet" id="estilo" href="{{ url_for('static', filename='css/bootstrap.min.neon.css') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
-	<nav class="navbar navbar-dark container-md bg-dark">
+	<nav class="navbar navbar-dark container-md bg-dark sticky-top">
 		<div class="container-fluid">
-		  <a class="navbar-brand text-light" href="#">Biblioteca</a>
+		  <a class="navbar-brand text-light" href="/">Biblioteca</a>
+		  <form class="d-flex" role="search">
+			<input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+			<button class="btn btn-outline-success" type="submit">Buscar</button>
+		  </form>
 		  <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		  </button>
@@ -30,12 +34,16 @@
 			  </li>
 			</ul>
 		  </div>
+		  
 		</div>
 	  </nav>
 
 	{% block body %}
 	{% endblock %}
 
+	<!-- <footer class="container-md d-flex justify-content-center bg-secondary ">
+		<p class="m-0 p-0">Create for Yair Juarez</p>
+	</footer> -->
 	<script src="{{ url_for('static', filename='js/bootstrap.bundle.js') }}"></script>
 	<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>

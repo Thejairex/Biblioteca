@@ -1,7 +1,8 @@
-from pydoc import render_doc
 from flask import Flask, render_template
 from flask_mysqldb import MySQL
-from querysAnime import qAnime
+from querys.querysAnime import qAnime
+from querys.querysComic import qComcic
+from querys.querysNovelas import qNovela
 
 app = Flask(__name__)
 
@@ -25,9 +26,19 @@ def index():
 	return render_template("index.html")
 
 @app.route("/animes")
-def testing():
-	data = qAnime.fetchall_anime().paginate()
+def animes():
+	data = qAnime.fetchall_anime()
 	return render_template("animes.html", datas=data)
+
+@app.route("/comics")
+def comics():
+	data = qComcic.fetchall_comic()
+	return render_template("comics.html", datas=data)
+
+@app.route("/novelas")
+def Novelas():
+	data = qNovela.fetchall_novela()
+	return render_template("novelas.html", datas=data)
 
 if __name__ == '__main__':
 	app.run(debug=True)

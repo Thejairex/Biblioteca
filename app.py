@@ -7,16 +7,16 @@ from querys.querysNovelas import qNovela
 app = Flask(__name__)
 
 mysql = MySQL(app)
-# app.config['MYSQL_HOST'] = 'Thejairex2.mysql.pythonanywhere-services.com'
-# app.config['MYSQL_USER'] = 'Thejairex2'
-# app.config['MYSQL_PASSWORD'] = 'Aiwa2015'
-# app.config['MYSQL_DB'] = 'Thejairex2$biblioteca'
+app.config['MYSQL_HOST'] = 'Thejairex2.mysql.pythonanywhere-services.com'
+app.config['MYSQL_USER'] = 'Thejairex2'
+app.config['MYSQL_PASSWORD'] = 'Aiwa2015'
+app.config['MYSQL_DB'] = 'Thejairex2$biblioteca'
 app.secret_key = "OtakuTeca"
 
-app.config['MYSQL_HOST'] = "localhost"
-app.config['MYSQL_USER'] = "root"
-app.config['MYSQL_PASSWORD'] = ""
-app.config['MYSQL_DB'] = "biblioteca"
+# app.config['MYSQL_HOST'] = "localhost"
+# app.config['MYSQL_USER'] = "root"
+# app.config['MYSQL_PASSWORD'] = ""
+# app.config['MYSQL_DB'] = "biblioteca"
 
 @app.route("/")
 def index():

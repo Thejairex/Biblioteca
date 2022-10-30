@@ -9,7 +9,12 @@ novelas = Blueprint('novelas', __name__, template_folder='app/templates')
 @novelas.route("/novelas")
 def novelasList():
 	data = qNovela.fetchall_novela()
-	return render_template("novelas.html", datas=data, titlePage="Novelas - Biblioteca")
+	return render_template("series.html", 
+		datas = data, 
+		titlePage = "Novelas - Biblioteca",
+		title = "Lista de Novelas",
+		serie = "novela",
+		th = "autor")
 
 @novelas.route("/novela" , methods=['POST'])
 def novela():
@@ -20,6 +25,16 @@ def novela():
 		dataFilter = Filter.Filter(data, search)
 
 		if len(dataFilter) != 1:
-			return render_template("novelas.html", datas=dataFilter,  serie="novela", titulo="Novela", titlePage="Novela - Biblioteca")
+			return render_template("series.html", 
+				datas = dataFilter, 
+				titlePage = "Comics - Biblioteca",
+				title = "{} Resultados".format(len(dataFilter)),
+				serie = "comic",
+				th = "autor")
 		else:
-			return render_template("comic.html", datas=dataFilter[0], serie="comic", titulo="Comic", titlePage="Comic - Biblioteca")
+			return render_template("search.html", 
+				datas=dataFilter[0],
+				titlePage = "Novelas - Biblioteca",
+				title = "{} Resultado".format(len(dataFilter)),
+				serie = "novela",
+				th = "autor")

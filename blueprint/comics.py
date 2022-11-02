@@ -1,10 +1,14 @@
+# Library
 from flask import  request, Blueprint, render_template
 
-from querys.querysComic import qComcic
-from blueprint.Funciones import Filter
+# Modules
+from querys.querysComic import qComcic # Querys Comic
+from blueprint.Funciones import Filter # Filter System
 
+# Init blueprint comics
 comics = Blueprint('comics', __name__, template_folder='app/templates')
 
+# All Comics
 @comics.route("/comics")
 def comicsList():
 	data = qComcic.fetchall_comic()
@@ -15,12 +19,14 @@ def comicsList():
 		serie = "comic",
 		th = "autor")
 
+
+# Search Comics
 @comics.route("/comic" , methods=['POST'])
 def comic():
 	if request.method == 'POST':
 		search = request.form['search']
 		data = qComcic.fetchall_comic()
-		dataFilter = Filter.Filter(data, search)
+		dataFilter = Filter.Filter(data, search) # Filter
 		if len(dataFilter) != 1:
 			return render_template("series.html", 
 				datas = dataFilter, 

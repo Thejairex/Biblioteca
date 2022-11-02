@@ -1,11 +1,14 @@
+# Librarys
 from flask import  request, Blueprint, render_template
 
-from querys.querysAnime import qAnime
-from blueprint.Funciones import Filter
+# Modules
+from querys.querysAnime import qAnime # Querys Animes
+from blueprint.Funciones import Filter # Filter System
 
-
+# Init blueprint animes
 animes = Blueprint('animes', __name__, template_folder='app/templates')
 
+# All animes
 @animes.route("/animes")
 def animesList():
 	data = qAnime.fetchall_anime()
@@ -16,12 +19,13 @@ def animesList():
 		serie = "anime",
 		th = "Cantidad de Temporadas")
 
+# Search animes
 @animes.route("/anime" , methods=['POST'])
 def anime():
 	if request.method == 'POST':
 		search = request.form['search']
 		data = qAnime.fetchall_anime()
-		dataFilter = Filter.Filter(data, search)
+		dataFilter = Filter.Filter(data, search) # Filter
 
 		if len(dataFilter) != 1:
 			return render_template("series.html", 

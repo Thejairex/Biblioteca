@@ -1,11 +1,14 @@
+# Librarys
 from flask import  request, Blueprint, render_template
 
-from querys.querysNovelas import qNovela
-from blueprint.Funciones import Filter
+# Modules
+from querys.querysNovelas import qNovela # Querys Novelas
+from blueprint.Funciones import Filter # Filter System
 
-
+# Init blueprint novelas
 novelas = Blueprint('novelas', __name__, template_folder='app/templates')
 
+# All novelas
 @novelas.route("/novelas")
 def novelasList():
 	data = qNovela.fetchall_novela()
@@ -16,13 +19,14 @@ def novelasList():
 		serie = "novela",
 		th = "autor")
 
+# Search novelas
 @novelas.route("/novela" , methods=['POST'])
 def novela():
 	if request.method == 'POST':
 		search = request.form['search']
 		data = qNovela.fetchall_novela()
 
-		dataFilter = Filter.Filter(data, search)
+		dataFilter = Filter.Filter(data, search) # Filter
 
 		if len(dataFilter) != 1:
 			return render_template("series.html", 

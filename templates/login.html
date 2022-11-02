@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block titlePage %}
+{{ titlePage }}
+{% endblock titlePage %}
+
+{% block body %}
+
+<div class="container-md px-3 bg-dark h-100 text-center text-light">
+
+    <h2>{{ title }}</h2>
+  
+    <div class="d-flex justify-content-center">
+        <form action="/api/login" method="POST" class="w-50">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" name="username" placeholder="Usuario">
+                <label for="floatingInput">Nombre de Usuario</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="floatingInput" name"passwd" placeholder="Contraseña">
+                <label for="floatingInput">Contreseña</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input class="btn btn-primary" type="submit" value="Ingresar">
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock body %}

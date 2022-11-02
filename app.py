@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 from flask_mysqldb import MySQL
 
 from blueprint.animes import animes
@@ -20,9 +20,20 @@ app.secret_key = "OtakuTeca"
 # app.config['MYSQL_PASSWORD'] = ""
 # app.config['MYSQL_DB'] = "biblioteca"
 
+@app.route("/api/login", methods=["POST"])
+def api_login():
+
+	return render_template("logeado.html")
+
+@app.route("/login")
+def login():
+	return render_template("login.html", 
+	titlePage = "Biblioteca",
+	title = "Login")
+
 @app.route("/")
 def index():
-	return render_template("index.html" , titlePage="Biblioteca")
+	return redirect(url_for('login')) #render_template("index.html" , titlePage="Biblioteca")
 
 app.register_blueprint(animes)
 app.register_blueprint(comics)

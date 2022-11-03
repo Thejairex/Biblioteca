@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, request, url_for
 from flask_mysqldb import MySQL
 
 from blueprint.animes import animes
@@ -22,8 +22,11 @@ app.secret_key = "OtakuTeca"
 
 @app.route("/api/login", methods=["POST"])
 def api_login():
+	if request.method == "POST":
+		data = request.form['username'], request.form['lastname']
 
-	return render_template("logeado.html")
+		return render_template("logeado.html",
+			data = data)
 
 @app.route("/login")
 def login():

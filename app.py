@@ -1,13 +1,16 @@
+# Import libraries
 from flask import Flask, render_template, redirect, request, url_for
 from flask_mysqldb import MySQL
 
+# Import de blueprints
 from blueprint.animes import animes
 from blueprint.comics import comics
 from blueprint.novelas import novelas
 
-
+# Init App FLask
 app = Flask(__name__)
 
+# Config Connection DDBB
 mysql = MySQL(app)
 app.config['MYSQL_HOST'] = 'Thejairex2.mysql.pythonanywhere-services.com'
 app.config['MYSQL_USER'] = 'Thejairex2'
@@ -20,6 +23,7 @@ app.secret_key = "OtakuTeca"
 # app.config['MYSQL_PASSWORD'] = ""
 # app.config['MYSQL_DB'] = "biblioteca"
 
+# Api Login
 @app.route("/api/login", methods=["POST"])
 def api_login():
 	if request.method == "POST":
@@ -28,16 +32,19 @@ def api_login():
 		return render_template("logeado.html",
 			data = data)
 
+# Route Login
 @app.route("/login")
 def login():
 	return render_template("login.html", 
 	titlePage = "Biblioteca",
 	title = "Login")
 
+# Route Main
 @app.route("/")
 def index():
 	return redirect(url_for('login')) #render_template("index.html" , titlePage="Biblioteca")
 
+# Register Blueprint
 app.register_blueprint(animes)
 app.register_blueprint(comics)
 app.register_blueprint(novelas)

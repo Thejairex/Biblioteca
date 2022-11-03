@@ -28,9 +28,7 @@ app.config['MYSQL_DB'] = "biblioteca"
 def api_login():
 	if request.method == "POST":
 		data = request.form['username'], request.form['lastname']
-
-		if loged:
-			return render_template("logeado.html",
+		return render_template("logeado.html",
 				data = data)
 
 # Route Login
@@ -43,13 +41,16 @@ def login():
 # Route Main
 @app.route("/")
 def index():
-	loged = make_response("")
-	loged.set_cookie('status','loged')
-	print(request.cookies.get(loged))
-	if loged:
-		return render_template('index.html', loged=loged) 
+	status = request.cookies.get('status')
+
+	print(status)
+	if status == None:
+		resp = make_response(redirect(url_for('login')))
+		status = "False"
+		resp.set_cookie('status', status)
+		return resp
 	else:
-		return redirect(url_for('login')) #render_template("index.html" , titlePage="Biblioteca")
+		return render_template("index.html")
 
 # Register Blueprint
 app.register_blueprint(animes)
@@ -57,4 +58,4 @@ app.register_blueprint(comics)
 app.register_blueprint(novelas)
 
 if __name__ == '__main__':
-	app.run(debug=True)
+	app.run(debug=True, port=3000)

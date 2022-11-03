@@ -10,4 +10,3 @@ class Filter():
                 dataFilter.append(i)
 
         return dataFilter
-

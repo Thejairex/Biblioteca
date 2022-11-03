@@ -1,5 +1,5 @@
 # Import libraries
-from flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, render_template, redirect, request, url_for, make_response
 from flask_mysqldb import MySQL
 
 # Import de blueprints
@@ -12,16 +12,16 @@ app = Flask(__name__)
 
 # Config Connection DDBB
 mysql = MySQL(app)
-app.config['MYSQL_HOST'] = 'Thejairex2.mysql.pythonanywhere-services.com'
-app.config['MYSQL_USER'] = 'Thejairex2'
-app.config['MYSQL_PASSWORD'] = 'Aiwa2015'
-app.config['MYSQL_DB'] = 'Thejairex2$biblioteca'
+# app.config['MYSQL_HOST'] = 'Thejairex2.mysql.pythonanywhere-services.com'
+# app.config['MYSQL_USER'] = 'Thejairex2'
+# app.config['MYSQL_PASSWORD'] = 'Aiwa2015'
+# app.config['MYSQL_DB'] = 'Thejairex2$biblioteca'
 app.secret_key = "OtakuTeca"
 
-# app.config['MYSQL_HOST'] = "localhost"
-# app.config['MYSQL_USER'] = "root"
-# app.config['MYSQL_PASSWORD'] = ""
-# app.config['MYSQL_DB'] = "biblioteca"
+app.config['MYSQL_HOST'] = "localhost"
+app.config['MYSQL_USER'] = "root"
+app.config['MYSQL_PASSWORD'] = ""
+app.config['MYSQL_DB'] = "biblioteca"
 
 # Api Login
 @app.route("/api/login", methods=["POST"])
@@ -29,8 +29,9 @@ def api_login():
 	if request.method == "POST":
 		data = request.form['username'], request.form['lastname']
 
-		return render_template("logeado.html",
-			data = data)
+		if loged:
+			return render_template("logeado.html",
+				data = data)
 
 # Route Login
 @app.route("/login")
@@ -42,7 +43,13 @@ def login():
 # Route Main
 @app.route("/")
 def index():
-	return redirect(url_for('login')) #render_template("index.html" , titlePage="Biblioteca")
+	loged = make_response("")
+	loged.set_cookie('status','loged')
+	print(request.cookies.get(loged))
+	if loged:
+		return render_template('index.html', loged=loged) 
+	else:
+		return redirect(url_for('login')) #render_template("index.html" , titlePage="Biblioteca")
 
 # Register Blueprint
 app.register_blueprint(animes)

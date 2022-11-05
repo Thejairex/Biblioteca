@@ -23,7 +23,7 @@ csrf = CSRFProtect(app)
 
 # Config Connection DDBB
 
-app.config['MYSQL_HOST'] = 'Thejairex2.mysql.pythonanywhere-pyservices.com'
+app.config['MYSQL_HOST'] = 'Thejairex2.mysql.pythonanywhere-services.com'
 app.config['MYSQL_USER'] = 'Thejairex2'
 app.config['MYSQL_PASSWORD'] = 'Aiwa2015'
 app.config['MYSQL_DB'] = 'Thejairex2$biblioteca'

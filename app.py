@@ -100,4 +100,4 @@ app.register_blueprint(registers)
 
 if __name__ == '__main__':
 	csrf.init_app(app)
-	app.run(debug=True, port=3000)
+	app.run(debug=True)

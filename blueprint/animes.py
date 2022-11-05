@@ -3,7 +3,7 @@ from flask import  request, Blueprint, render_template
 
 # Modules
 from querys.querysAnime import qAnime # Querys Animes
-from blueprint.Funciones import Filter # Filter System
+from blueprint.Funciones import Funciones 
 
 # Init blueprint animes
 animes = Blueprint('animes', __name__, template_folder='app/templates')
@@ -25,7 +25,7 @@ def anime():
 	if request.method == 'POST':
 		search = request.form['search']
 		data = qAnime.fetchall_anime()
-		dataFilter = Filter.Filter(data, search) # Filter
+		dataFilter = Funciones.Filter(data, search) # Filter
 
 		if len(dataFilter) != 1:
 			return render_template("series.html", 

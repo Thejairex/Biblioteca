@@ -3,7 +3,7 @@ from flask import  request, Blueprint, render_template
 
 # Modules
 from querys.querysComic import qComcic # Querys Comic
-from blueprint.Funciones import Filter # Filter System
+from blueprint.Funciones import Funciones # Filter System
 
 # Init blueprint comics
 comics = Blueprint('comics', __name__, template_folder='app/templates')
@@ -26,7 +26,7 @@ def comic():
 	if request.method == 'POST':
 		search = request.form['search']
 		data = qComcic.fetchall_comic()
-		dataFilter = Filter.Filter(data, search) # Filter
+		dataFilter = Funciones.Filter(data, search) # Filter
 		if len(dataFilter) != 1:
 			return render_template("series.html", 
 				datas = dataFilter, 

@@ -19,7 +19,7 @@ from blueprint.registers import registers
 # Init App FLask
 app = Flask(__name__)
 mysql = MySQL(app)
-csrf = CSRFProtect()
+csrf = CSRFProtect(app)
 
 # Config Connection DDBB
 

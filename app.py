@@ -1,7 +1,7 @@
 # Import libraries
 from flask import Flask, render_template, redirect, request, url_for, make_response, jsonify
 from flask_mysqldb import MySQL
-from flask_login import LoginManager, login_user, user_loaded_from_cookie, logout_user, login_required, UserMixin, current_user
+from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin
 from flask_wtf.csrf import CSRFProtect
 
 import hashlib
@@ -23,17 +23,17 @@ csrf = CSRFProtect(app)
 
 # Config Connection DDBB
 
-app.config['MYSQL_HOST'] = 'Thejairex2.mysql.pythonanywhere-services.com'
-app.config['MYSQL_USER'] = 'Thejairex2'
-app.config['MYSQL_PASSWORD'] = 'Aiwa2015'
-app.config['MYSQL_DB'] = 'Thejairex2$biblioteca'
+# app.config['MYSQL_HOST'] = 'Thejairex2.mysql.pythonanywhere-services.com'
+# app.config['MYSQL_USER'] = 'Thejairex2'
+# app.config['MYSQL_PASSWORD'] = 'Aiwa2015'
+# app.config['MYSQL_DB'] = 'Thejairex2$biblioteca'
 app.secret_key = "OtakuTeca"
 
 
-# app.config['MYSQL_HOST'] = "localhost"
-# app.config['MYSQL_USER'] = "root"
-# app.config['MYSQL_PASSWORD'] = ""
-# app.config['MYSQL_DB'] = "biblioteca"
+app.config['MYSQL_HOST'] = "localhost"
+app.config['MYSQL_USER'] = "root"
+app.config['MYSQL_PASSWORD'] = ""
+app.config['MYSQL_DB'] = "biblioteca"
 
 # Login
 

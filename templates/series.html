@@ -6,6 +6,7 @@
 
 {% block searchBox %}
 <form class="d-flex" role="search" action="/{{serie}}" method="POST">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
     <input class="form-control me-2" type="search" name="search" placeholder="Buscar" aria-label="Search">
     <button class="btn btn-outline-success" type="submit">Buscar</button>
 </form>

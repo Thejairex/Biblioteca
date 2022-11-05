@@ -13,3 +13,9 @@ const changeStyle = (x) => {
     
 
 }
+
+let dropdowns = document.getElementById('dropdown-main')
+dropdowns.addEventListener('click', function (e) {
+        var el = this.nextElementSibling
+        el.style.display = el.style.display==='block'?'none':'block'
+    })

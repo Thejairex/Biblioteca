@@ -1,7 +1,7 @@
 # Import libraries
 from flask import Flask, render_template, redirect, request, url_for, make_response, jsonify
 from flask_mysqldb import MySQL
-from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin
+from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin, current_user
 from flask_wtf.csrf import CSRFProtect
 
 import hashlib
@@ -85,6 +85,7 @@ def logout():
 @app.route("/")
 @login_required
 def index():
+	print(current_user.username)
 	return render_template('index.html',titlePage="Biblioteca")
 	
 

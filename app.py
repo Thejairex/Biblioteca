@@ -1,23 +1,29 @@
 # Import libraries
-from flask import Flask, render_template, redirect, request, url_for, make_response
+from flask import Flask, render_template, redirect, request, url_for, make_response, jsonify
 from flask_mysqldb import MySQL
-from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager, verify_jwt_in_request
-import hashlib
+from flask_login import LoginManager, login_user, user_loaded_from_cookie, logout_user, login_required, UserMixin, current_user
+from flask_wtf.csrf import CSRFProtect
 
+import hashlib
+from querys.entities.User import User
 # Import Modules
 from blueprint.Funciones import Funciones
-
+from querys.querysUser import qUser
 # Import de blueprints
 from blueprint.animes import animes
 from blueprint.comics import comics
 from blueprint.novelas import novelas
+from blueprint.registers import registers
+
 
 # Init App FLask
 app = Flask(__name__)
+mysql = MySQL(app)
+csrf = CSRFProtect()
 
 # Config Connection DDBB
-mysql = MySQL(app)
-# app.config['MYSQL_HOST'] = 'Thejairex2.mysql.pythonanywhere-services.com'
+
+# app.config['MYSQL_HOST'] = 'Thejairex2.mysql.pythonanywhere-pyservices.com'
 # app.config['MYSQL_USER'] = 'Thejairex2'
 # app.config['MYSQL_PASSWORD'] = 'Aiwa2015'
 # app.config['MYSQL_DB'] = 'Thejairex2$biblioteca'
@@ -29,21 +35,37 @@ app.config['MYSQL_USER'] = "root"
 app.config['MYSQL_PASSWORD'] = ""
 app.config['MYSQL_DB'] = "biblioteca"
 
-# Json Web Token
-jwt = JWTManager(app)
-app.config['JWT_SECRET_KEY'] = "oTAKUtECA"
+# Login
+
+login_manager = LoginManager(app)
+login_manager.login_view = "login"
 
 
-# Api Login
+@login_manager.user_loader
+def load_user(id):
+	return qUser.getUserID(id)
+
+# Api Logins
 @app.route("/api/login", methods=["POST"])
 def api_login():
 	if request.method == "POST":
 		username = request.form['username'] 
-		password = request.form['lastname']
+		password = request.form['password']
 		password = hashlib.sha256(password.encode('utf-8')).hexdigest()
-		data = (username,password)
-		return render_template("logeado.html",
-				data = data)
+
+		user = User(0,username,password,None)
+
+		logged_user = qUser.loginUser(user)
+
+		if logged_user == None:
+			return "El usuario no esta registrado"
+		else:
+			if logged_user.password:
+				login_user(logged_user)
+				return redirect(url_for('index'))
+			else:
+				return "Contraseña incorrecta" 
+
 
 # Route Login
 @app.route("/login")
@@ -52,30 +74,30 @@ def login():
 	titlePage = "Biblioteca",
 	title = "Login")
 
+# Route Logout
+@app.route('/logout')
+def logout():
+	logout_user()
+	return redirect(url_for('login'))
+
+
 # Route Main
 @app.route("/")
+@login_required
 def index():
-	try:
-		verifiqued = Funciones.verificarToken()
-		print(verifiqued)
-		return render_template("index.html")
-	except:
-		return redirect(url_for('login'))
+	return render_template('index.html',titlePage="Biblioteca")
 	
 
-	# print(status)
-	# if status == None:
-	# 	resp = make_response(redirect(url_for('login')))
-	# 	status = "False"
-	# 	resp.set_cookie('status', status)
-	# 	return resp
-	# else:
+	
 	
 
 # Register Blueprint
 app.register_blueprint(animes)
 app.register_blueprint(comics)
 app.register_blueprint(novelas)
+app.register_blueprint(registers)
+
 
 if __name__ == '__main__':
+	csrf.init_app(app)
 	app.run(debug=True, port=3000)

@@ -1,5 +1,6 @@
 # Librarys
 from flask import  request, Blueprint, render_template
+from flask_login import login_required
 
 # Modules
 from querys.querysAnime import qAnime # Querys Animes
@@ -10,6 +11,7 @@ animes = Blueprint('animes', __name__, template_folder='app/templates')
 
 # All animes
 @animes.route("/animes")
+@login_required
 def animesList():
 	data = qAnime.fetchall_anime()
 	return render_template("series.html", 

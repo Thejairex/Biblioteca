@@ -1,5 +1,4 @@
 # Module Funciones
-from flask_jwt_extended import verify_jwt_in_request
 class Funciones():
 
     # Filter system
@@ -11,8 +10,3 @@ class Funciones():
                 dataFilter.append(i)
 
         return dataFilter
-
-
-    @classmethod
-    def verificarToken(self,):
-        return verify_jwt_in_request()

@@ -1,5 +1,6 @@
 # Library
 from flask import  request, Blueprint, render_template
+from flask_login import login_required
 
 # Modules
 from querys.querysComic import qComcic # Querys Comic
@@ -10,6 +11,7 @@ comics = Blueprint('comics', __name__, template_folder='app/templates')
 
 # All Comics
 @comics.route("/comics")
+@login_required
 def comicsList():
 	data = qComcic.fetchall_comic()
 	return render_template("series.html", 

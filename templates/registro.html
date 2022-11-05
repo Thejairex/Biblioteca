@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block titlePage %}
+{{ titlePage }}
+{% endblock titlePage %}
+
+{% block body %}
+
+<div class="container-md px-3 bg-dark h-100 text-center text-light">
+
+    <h2>{{ title }}</h2>
+  
+    <div class="d-flex justify-content-center">
+        <form action="/api/register" method="POST" class="w-50" id="formulario">
+            <label for="exampleFormControlInput1" class="form-label">Username</label>
+            <input type="text" class="form-control mb-3" id="Username" name="username" placeholder="Username">
+            <p class="formulario__input-error mb-3" id="error_Username">El usuario tiene que ser de 4 a 16 dígitos y solo puede contener numeros, letras y guion bajo.</p>
+
+            <label for="exampleFormControlInput1" class="form-label">Password</label>
+            <input type="password" class="form-control mb-3" id="Password" name="password" placeholder="Password">
+            <p class="formulario__input-error mb-3" id="error_Password">La contraseña tiene que ser de 8 a 24 dígitos.</p>
+
+            <label for="exampleFormControlInput1" class="form-label">Re-Password</label>
+            <input type="password" class="form-control mb-3" id="confirmPassword" name="password2" placeholder="Password">
+            <p class="formulario__input-error mb-3" id="error_confirmPassword">Ambas contraseñas deben ser iguales.</p>
+
+            <button type="submit" class="btn btn-primary mb-3" id="btn-form">Ingresar</button>
+        </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/form.js') }}"></script>
+</div>
+
+{% endblock body %}

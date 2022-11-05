@@ -1,5 +1,6 @@
 # Librarys
 from flask import  request, Blueprint, render_template, redirect, url_for
+from flask_login import login_required
 
 # Modules
 from querys.querysNovelas import qNovela # Querys Novelas
@@ -11,18 +12,16 @@ novelas = Blueprint('novelas', __name__, template_folder='app/templates')
 
 # All novelas
 @novelas.route("/novelas")
+@login_required
 def novelasList():
-	try:
-		verificacion = Funciones.verificarToken()
-		data = qNovela.fetchall_novela()
-		return render_template("series.html", 
-			datas = data, 
-			titlePage = "Novelas - Biblioteca",
-			title = "Lista de Novelas",
-			serie = "novela",
-			th = "autor")
-	except:
-		return redirect(url_for('login'))
+	
+	data = qNovela.fetchall_novela()
+	return render_template("series.html", 
+		datas = data, 
+		titlePage = "Novelas - Biblioteca",
+		title = "Lista de Novelas",
+		serie = "novela",
+		th = "autor")
 
 # Search novelas
 @novelas.route("/novela" , methods=['POST'])

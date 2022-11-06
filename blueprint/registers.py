@@ -1,6 +1,6 @@
 # Librarys
 from flask import  request, Blueprint, render_template, redirect, url_for
-from flask_login import login_required
+from flask_login import login_required, current_user
 import hashlib
 
 # Modules
@@ -15,10 +15,13 @@ registers = Blueprint('registers', __name__, template_folder='app/templates')
 @registers.route("/register")
 @login_required
 def register():
-	
-	return render_template('registro.html',
-	titlePage = "Registro",
-	title = "Registrar nueva cuenta")
+	if current_user.rol == 'Administrador':
+		return render_template('registro.html',
+		titlePage = "Registro",
+		title = "Registrar nueva cuenta")
+	else:
+		return render_template('404.html',
+		titlePage = "Not Found")
 
 @registers.route("/api/register", methods=['POST'])
 @login_required
@@ -29,5 +32,6 @@ def api_register():
 		password = hashlib.sha256(password.encode('utf-8')).hexdigest()
 		rol = "cliente"
 		data = qUser.registerUser(username,password,rol)
-
+		
 		return redirect(url_for('registers.register'))
+		

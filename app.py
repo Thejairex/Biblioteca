@@ -88,7 +88,11 @@ def logout():
 def index():
 	return render_template('index.html',titlePage="Biblioteca")
 	
-
+# Routes Errors
+@app.errorhandler(404)
+def page_not_found(e):
+	return render_template('404.html',
+	titlePage = "Not Found"), 404
 	
 	
 

@@ -28,46 +28,6 @@
 				</li>
 				
 				<li class="nav-item dropdown">
-					{% if url_for(request.endpoint) != '/login' %}
-						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true" id="dropdown-main">
-							{{ current_user.username }}
-						</a>
-						<ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
-							<li>
-							</li>
-							{% if current_user.rol == 'Administrador' %}
-							<li class="dropdown-item">
-								<a class="nav-link" href="/register">Añadir cuenta</a>
-							</li>
-							{% endif %}
-							
-							<li class="dropdown-item dropstart">
-								<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">
-									Temas
-								</a>
-								<ul class='dropdown-menu dropdown-menu-dark dropdown-menu-end'>
-									<li>
-										<button class="dropdown-item btn" onclick="changeStyle(1)">Bootstrap Principal</button>
-									</li>
-									<li >
-										<button class="dropdown-item btn" onclick="changeStyle(2)">Bootstrap Dark</button>
-									</li>
-									<li >
-										<button class="dropdown-item btn" onclick="changeStyle(3)">Bootstrap Neon</button>
-									</li>
-									<li >
-										<button class="dropdown-item btn" onclick="changeStyle(4)">Bootstrap Quart</button>
-									</li>
-								</ul>
-							</li>
-							<li>
-								<a href="{{ url_for('logout') }} " class="dropdown-item">Cerrar Sesion</a>
-							</li>
-						</ul>
-				</li>
-				
-					{% else %}
-			
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">
 								Temas
@@ -87,7 +47,6 @@
 								</li>
 							</ul>
 						</li>
-					{% endif %}
 					</ul>
 				</li>
 					

@@ -23,6 +23,7 @@ def animesList():
 
 # Search animes
 @animes.route("/anime" , methods=['POST'])
+@login_required
 def anime():
 	if request.method == 'POST':
 		search = request.form['search']

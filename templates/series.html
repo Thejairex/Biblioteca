@@ -15,8 +15,15 @@
 
 {% block body %}
 
-<div class="container-md px-3 bg-dark h-100 text-center text-light ">
-    <h2>{{ title }}</h2>
+<div class="container-md px-3 bg-dark h-100 text-center text-light">
+    <div class="d-flex justify-content-center align-items-center mb-2">
+        <h2 class="m-0">{{ title }}</h2>
+        {% if current_user.rol == 'Administrador' %}
+            <a href="#" class="btn btn-success ms-1"><i class="fa-solid fa-plus"></i></a>
+        {% endif %}
+        
+    </div>
+    
     <div class=" tabla fixTableHead">
         <table class="table table-striped">
             <thead class="bg-primary">
@@ -25,6 +32,10 @@
                 <th class="bg-primary">Cantidad de Capitulos</th>
                 <th class="bg-primary">{{ th }}</th>
                 <th class="bg-primary">Tipo</th>
+                {% if current_user.rol == 'Administrador' %}
+                    <th class="bg-primary">Acciones</th></th>
+                {% endif %}
+                
             </thead>
             <tbody>
                 {% for data in datas%}
@@ -34,6 +45,13 @@
                         <td>{{data[2]}}</td>
                         <td>{{data[3]}}</td>
                         <td>{{data[4]}}</td>
+                        {% if current_user.rol == 'Administrador' %}
+                        <td>
+                            <a href="#" class="btn btn-info"><i class="fa-solid fa-pencil"></i></a>
+                            <a href="#" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                        </td>
+                        {% endif %}
+                        
                     </tr>
                 {% endfor %}
             </tbody>

@@ -16,9 +16,12 @@ registers = Blueprint('registers', __name__, template_folder='app/templates')
 @login_required
 def register():
 	
-	return render_template('registro.html')
+	return render_template('registro.html',
+	titlePage = "Registro",
+	title = "Registrar nueva cuenta")
 
 @registers.route("/api/register", methods=['POST'])
+@login_required
 def api_register():
 	if request.method == 'POST':
 		username = request.form['username'] 
@@ -27,4 +30,4 @@ def api_register():
 		rol = "cliente"
 		data = qUser.registerUser(username,password,rol)
 
-		return redirect(url_for('login'))
+		return redirect(url_for('registers.register'))

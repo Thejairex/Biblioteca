@@ -12,6 +12,8 @@
   
     <div class="d-flex justify-content-center">
         <form action="/api/register" method="POST" class="w-50" id="formulario">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            
             <label for="exampleFormControlInput1" class="form-label">Username</label>
             <input type="text" class="form-control mb-3" id="Username" name="username" placeholder="Username">
             <p class="formulario__input-error mb-3" id="error_Username">El usuario tiene que ser de 4 a 16 dígitos y solo puede contener numeros, letras y guion bajo.</p>

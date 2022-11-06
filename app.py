@@ -3,8 +3,9 @@ from flask import Flask, render_template, redirect, request, url_for, make_respo
 from flask_mysqldb import MySQL
 from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin, current_user
 from flask_wtf.csrf import CSRFProtect
-
 import hashlib
+from datetime import timedelta
+
 from querys.entities.User import User
 # Import Modules
 from blueprint.Funciones import Funciones
@@ -40,7 +41,7 @@ app.config['MYSQL_DB'] = "biblioteca"
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
 
-
+# Load user
 @login_manager.user_loader
 def load_user(id):
 	return qUser.getUserID(id)
@@ -61,7 +62,7 @@ def api_login():
 			return "El usuario no esta registrado"
 		else:
 			if logged_user.password:
-				login_user(logged_user)
+				login_user(logged_user, remember=False)
 				return redirect(url_for('index'))
 			else:
 				return "Contraseña incorrecta" 
@@ -85,7 +86,6 @@ def logout():
 @app.route("/")
 @login_required
 def index():
-	print(current_user.username)
 	return render_template('index.html',titlePage="Biblioteca")
 	
 

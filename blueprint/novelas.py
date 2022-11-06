@@ -25,6 +25,7 @@ def novelasList():
 
 # Search novelas
 @novelas.route("/novela" , methods=['POST'])
+@login_required
 def novela():
 	if request.method == 'POST':
 		search = request.form['search']

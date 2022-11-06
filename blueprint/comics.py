@@ -24,6 +24,7 @@ def comicsList():
 
 # Search Comics
 @comics.route("/comic" , methods=['POST'])
+@login_required
 def comic():
 	if request.method == 'POST':
 		search = request.form['search']

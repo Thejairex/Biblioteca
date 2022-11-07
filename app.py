@@ -4,11 +4,9 @@ from flask_mysqldb import MySQL
 from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin, current_user
 from flask_wtf.csrf import CSRFProtect
 import hashlib
-from datetime import timedelta
 
 from querys.entities.User import User
 # Import Modules
-from blueprint.Funciones import Funciones
 from querys.querysUser import qUser
 # Import de blueprints
 from blueprint.animes import animes
@@ -81,12 +79,23 @@ def logout():
 	logout_user()
 	return redirect(url_for('login'))
 
+def cookies():
+	theme = request.cookies.get('theme')
+	if theme == None:
+		res = make_response("")
+		res.set_cookie('theme', 'css/bootstrap.min.neon.css')
+	
+		return res
+	return theme
 
 # Route Main
 @app.route("/")
 @login_required
 def index():
-	return render_template('index.html',titlePage="Biblioteca")
+	res = cookies()
+	print(res)
+	return render_template('index.html',titlePage="Biblioteca",
+	res = res)
 	
 # Routes Errors
 @app.errorhandler(404)

@@ -24,17 +24,17 @@ csrf = CSRFProtect(app)
 
 # Config Connection DDBB
 
-app.config['MYSQL_HOST'] = 'Thejairex2.mysql.pythonanywhere-services.com'
-app.config['MYSQL_USER'] = 'Thejairex2'
-app.config['MYSQL_PASSWORD'] = 'Aiwa2015'
-app.config['MYSQL_DB'] = 'Thejairex2$biblioteca'
+# app.config['MYSQL_HOST'] = 'Thejairex2.mysql.pythonanywhere-services.com'
+# app.config['MYSQL_USER'] = 'Thejairex2'
+# app.config['MYSQL_PASSWORD'] = 'Aiwa2015'
+# app.config['MYSQL_DB'] = 'Thejairex2$biblioteca'
 app.secret_key = "OtakuTeca"
 
 
-# app.config['MYSQL_HOST'] = "localhost"
-# app.config['MYSQL_USER'] = "root"
-# app.config['MYSQL_PASSWORD'] = ""
-# app.config['MYSQL_DB'] = "biblioteca"
+app.config['MYSQL_HOST'] = "localhost"
+app.config['MYSQL_USER'] = "root"
+app.config['MYSQL_PASSWORD'] = ""
+app.config['MYSQL_DB'] = "biblioteca"
 
 # Login
 
@@ -94,7 +94,10 @@ def page_not_found(e):
 	return render_template('404.html',
 	titlePage = "Not Found"), 404
 	
-	
+@app.errorhandler(500)
+def page_error_internal(e):
+	return render_template('500.html',
+	titlePage = "Error Internal Server"), 500
 
 # Register Blueprint
 app.register_blueprint(animes)

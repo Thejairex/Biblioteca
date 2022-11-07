@@ -30,7 +30,7 @@ class qUser(UserMixin):
                     user = User(data[0],data[1],None,data[2])
                     return user
             except Exception as e:
-                raise e
+                print(e)
 
     @classmethod
     def loginUser(self, user):

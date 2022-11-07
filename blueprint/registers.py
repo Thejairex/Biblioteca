@@ -21,7 +21,7 @@ def register():
 		title = "Registrar nueva cuenta")
 	else:
 		return render_template('404.html',
-		titlePage = "Not Found")
+		titlePage = "Not Found") , 404
 
 @registers.route("/api/register", methods=['POST'])
 @login_required
@@ -30,7 +30,12 @@ def api_register():
 		username = request.form['username'] 
 		password = request.form['password']
 		password = hashlib.sha256(password.encode('utf-8')).hexdigest()
-		rol = "cliente"
+		rolTemp = int(request.form.get('rol'))
+		if rolTemp == 1:
+			rol = 'Administrador'
+		elif rolTemp == 2:
+			rol = 'Cliente'
+
 		data = qUser.registerUser(username,password,rol)
 		
 		return redirect(url_for('registers.register'))

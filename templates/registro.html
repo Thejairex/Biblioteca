@@ -26,11 +26,17 @@
             <input type="password" class="form-control mb-3" id="confirmPassword" name="password2" placeholder="Password">
             <p class="formulario__input-error mb-3" id="error_confirmPassword">Ambas contraseñas deben ser iguales.</p>
 
-            <button type="submit" class="btn btn-primary mb-3" id="btn-form">Ingresar</button>
+            <select class="form-select form-select-md mb-3" name="rol" aria-label=".form-select-md example">
+                <option selected>Rol de usuario</option>
+                <option value="1">Administrador</option>
+                <option value="2">Cliente</option>
+            </select>
+
+            <button type="submit" class="btn btn-primary mb-3" id="btn-form">Registrar nueva cuenta</button>
         </form>
     </div>
 
-    <script src="{{ url_for('static', filename='js/form.js') }}"></script>
+    
 </div>
-
+<script src="{{ url_for('static', filename='js/form.js') }}"></script>
 {% endblock body %}

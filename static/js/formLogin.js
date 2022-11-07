@@ -12,8 +12,7 @@ const expresiones = {
 
 const campos = {
     Username: false,
-    Password: false,
-    Password2: false
+    Password: false
 }
 
 const validarFormulario = (e) => {
@@ -24,10 +23,6 @@ const validarFormulario = (e) => {
             break;
         case "password":
             validadCampo(expresiones.password, e.target, 'Password');
-            break;
-
-        case "password2":
-            validarPassword2();
             break;
     }
 };
@@ -48,30 +43,13 @@ const validadCampo = (expresion, input, campo) => {
     }
 }
 
-const validarPassword2 = () => {
-    const inputPassword1 = document.getElementById('Password');
-    const inputPassword2 = document.getElementById('confirmPassword');
-
-    if (inputPassword1.value !== inputPassword2.value) {
-        document.getElementById(`confirmPassword`).classList.add('border-danger');
-        document.querySelector(`#error_confirmPassword.formulario__input-error`).classList.add('formulario__input-error-activo');
-        campos['Password2'] = false;
-        validadDatos();
-    } else {
-        document.getElementById(`confirmPassword`).classList.remove('border-danger');
-        document.getElementById(`confirmPassword`).classList.add('border-success');
-        document.querySelector(`#error_confirmPassword.formulario__input-error`).classList.remove('formulario__input-error-activo');
-        campos['Password2'] = true;
-        validadDatos();
-    }
-}
 inputs.forEach((input) => {
     input.addEventListener('keyup', validarFormulario);
     input.addEventListener('blur', validarFormulario);
 });
 
 const validadDatos = () => {
-    if (campos.Username===true && campos.Password===true && campos.Password2===true) {
+    if (campos.Username===true && campos.Password===true) {
         document.getElementById("btn-form").classList.remove("disabled");
     } else {
         document.getElementById("btn-form").classList.add("disabled");

@@ -24,3 +24,10 @@ class qAnime():
             return data
         except Exception as e:
             return f"No Recibido {e}"
+
+    @classmethod
+    def fetchall_anime_asc(self):
+        try:
+            pass
+        except:
+            pass

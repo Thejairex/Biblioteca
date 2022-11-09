@@ -41,7 +41,7 @@ class qUser(UserMixin):
             cur.execute(query)
             data = cur.fetchone()
             if data == None:
-                return None
+                return "Pachinga"
             else:
                 if data[2] == user.password:
                     verificatedPassword = True

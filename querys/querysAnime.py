@@ -24,3 +24,11 @@ class qAnime():
             return data
         except Exception as e:
             return f"No Recibido {e}"
+
+    @classmethod
+    def fetch10_anime(self, offset):
+        cur = mysql.connection.cursor()
+        query = "SELECT * FROM anime LIMIT 10 OFFSET {}".format(offset)
+        cur.execute(query)
+        data = cur.fetchall()
+        return data

@@ -1,9 +1,11 @@
 # Import libraries
-from flask import Flask, render_template, redirect, request, url_for, make_response, jsonify
+from flask import Flask, render_template, redirect, request, url_for, make_response
 from flask_mysqldb import MySQL
 from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin, current_user
 from flask_wtf.csrf import CSRFProtect
+
 import hashlib
+import pytest
 
 from querys.entities.User import User
 # Import Modules
@@ -16,7 +18,17 @@ from blueprint.registers import registers
 
 
 # Init App FLask
-app = Flask(__name__)
+def create_app():
+	app = Flask(__name__)
+	app.secret_key = "OtakuTeca"
+
+	app.config['MYSQL_HOST'] = "localhost"
+	app.config['MYSQL_USER'] = "root"
+	app.config['MYSQL_PASSWORD'] = ""
+	app.config['MYSQL_DB'] = "biblioteca"
+	return app
+
+app = create_app()
 mysql = MySQL(app)
 csrf = CSRFProtect(app)
 
@@ -26,13 +38,7 @@ csrf = CSRFProtect(app)
 # app.config['MYSQL_USER'] = 'Thejairex2'
 # app.config['MYSQL_PASSWORD'] = 'Aiwa2015'
 # app.config['MYSQL_DB'] = 'Thejairex2$biblioteca'
-app.secret_key = "OtakuTeca"
 
-
-app.config['MYSQL_HOST'] = "localhost"
-app.config['MYSQL_USER'] = "root"
-app.config['MYSQL_PASSWORD'] = ""
-app.config['MYSQL_DB'] = "biblioteca"
 
 # Login
 
@@ -87,6 +93,15 @@ def cookies():
 	
 		return res
 	return theme
+
+# Testing
+@pytest.fixture()
+def client():
+    return app.test_client()
+
+def test_request_example(client):
+    response = client.get("/login")
+    assert response.status_code == 200
 
 # Route Main
 @app.route("/")

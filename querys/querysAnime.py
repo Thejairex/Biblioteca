@@ -32,3 +32,10 @@ class qAnime():
         cur.execute(query)
         data = cur.fetchall()
         return data
+
+    def fetchall_anime_asc(self):
+        try:
+            pass
+        except:
+            pass
+

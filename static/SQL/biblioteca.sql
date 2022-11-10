@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-10-2022 a las 08:21:40
+-- Tiempo de generación: 10-11-2022 a las 20:15:17
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -45,13 +45,12 @@ INSERT INTO `anime` (`id_anime`, `nombre`, `cantidad_cap`, `cantidad_temp`, `tip
 (3, 'ben-to', 12, 1, 'Japones'),
 (4, 'Blood+', 50, 1, 'Japones'),
 (5, 'Blood-c', 12, 1, 'Japones'),
-(6, 'Noucome', 12, 1, 'Japones'),
+(6, 'Noucome', 22, 2, 'Japones'),
 (7, 'Sousei no Onmyouji', 50, 1, 'Japones'),
 (8, 'Sankarea', 12, 1, 'Japones'),
 (9, 'hajimete kamisama', 24, 2, 'Japones'),
 (10, 'Shakugan no Shana', 72, 3, 'Japones'),
 (11, 'Bokutachi wa benkyou ga dekinay', 24, 2, 'Japones'),
-(12, 'Noucome', 10, 1, 'Japones'),
 (13, 'Nisekoi', 32, 2, 'Japones'),
 (14, 'Sword Art Online', 80, 4, 'Japones'),
 (15, 'ore wo suki nano wa omae dake ka yo', 12, 1, 'Japones'),
@@ -64,7 +63,6 @@ INSERT INTO `anime` (`id_anime`, `nombre`, `cantidad_cap`, `cantidad_temp`, `tip
 (22, 'ore ga suki nano wa im?to dakedo im?to ja nai', 12, 1, 'Japones'),
 (23, 'kishuku gakkou no juliet', 12, 1, 'Japones'),
 (24, 'seishun buta yarou wa bunny girl senpai no yume wo minai', 12, 1, 'Japones'),
-(25, '1', 24, 2, 'Japones'),
 (26, 'wotaku ni koi wa muzukashii', 12, 1, 'Japones'),
 (27, 'Devils Line', 12, 1, 'Japones'),
 (28, 'tada kun wa koi wa shinai', 13, 1, 'Japones'),
@@ -102,7 +100,6 @@ INSERT INTO `anime` (`id_anime`, `nombre`, `cantidad_cap`, `cantidad_temp`, `tip
 (60, 'hitsugi no chaika', 24, 2, 'Japones'),
 (61, 'no game no life', 12, 1, 'Japones'),
 (62, 'black bullet', 13, 1, 'Japones'),
-(63, '1', 26, 1, 'Japones'),
 (64, 'kamigami no asobi', 12, 1, 'Japones'),
 (65, 'Soredemo Sekai wa Utsukushii', 12, 1, 'Japones'),
 (66, 'seikoku no dragonar', 12, 1, 'Japones'),
@@ -209,23 +206,18 @@ INSERT INTO `anime` (`id_anime`, `nombre`, `cantidad_cap`, `cantidad_temp`, `tip
 (167, 'Shinmai Maou no Testament', 23, 2, 'Japones'),
 (168, 'Ore ga Ojousama Gakkou ni Shomin Sample Toshite Gets?Sareta Ken', 12, 1, 'Japones'),
 (169, 'Hidan no Aria', 13, 1, 'Japones'),
-(170, 'Noragami', 25, 2, 'Japones'),
 (171, 'Rakudai Kishi no Cavalry ', 12, 1, 'Japones'),
 (172, 'Kuusen Madoushi Kouhosei no Kyoukan', 13, 1, 'Japones'),
 (173, 'Jitsu wa Watashi wa', 13, 1, 'Japones'),
 (174, 'Charlotte', 14, 1, 'Japones'),
-(175, 'Aoharu x Kikanjuu', 12, 1, 'Japones'),
 (176, 'Yamada-kun to 7-nin no Majo (TV)', 12, 1, 'Japones'),
 (177, 'Juuou Mujin no Fafnir', 12, 1, 'Japones'),
-(178, 'Hitsugi no Chaika', 23, 1, 'Japones'),
 (179, 'Inou-Battle wa Nichijou-kei no Naka de', 12, 1, 'Japones'),
 (180, 'Amagi Brilliant Park', 13, 1, 'Japones'),
 (181, 'Himegoto', 13, 1, 'Japones'),
-(182, 'Soredemo Sekai wa Utsukushii', 12, 1, 'Japones'),
 (183, '.Seikoku no Dragonar', 12, 1, 'Japones'),
 (184, 'Mikakunin de Shinkoukei', 12, 1, 'Japones'),
 (185, 'Ore No Imouto Ga Konnani Kawaii Wake Ga Nai', 25, 2, 'Japones'),
-(186, 'Boku wa Tomodachi ga Sukunai', 25, 2, 'Japones'),
 (187, 'Ore no Kanojo to Osananajimi ga Shuraba Sugiru', 13, 1, 'Japones'),
 (188, 'Kuma Kuma Kuma Bear', 12, 1, 'Japones'),
 (189, 'Kimi to Boku no Saigo no Senjou, Aruiwa Sekai ga Hajimaru Seisen', 12, 1, 'Japones'),
@@ -264,7 +256,6 @@ INSERT INTO `anime` (`id_anime`, `nombre`, `cantidad_cap`, `cantidad_temp`, `tip
 (222, 'Infinite Stratos', 24, 2, 'Japones'),
 (223, 'Outbreak Company', 12, 1, 'Japones'),
 (224, 'Hentai Ouji to Warawanai Neko', 12, 1, 'Japones'),
-(225, 'Ore no Kanojo to Osananajimi ga Shuraba Sugiru', 13, 1, 'Japones'),
 (226, 'Binbougami ga!', 13, 1, 'Japones'),
 (227, 'Kore wa Zombie Desu ka?', 24, 2, 'Japones'),
 (228, 'Inu x Boku SS', 13, 1, 'Japones'),
@@ -299,7 +290,6 @@ INSERT INTO `anime` (`id_anime`, `nombre`, `cantidad_cap`, `cantidad_temp`, `tip
 (257, 'Koi Kaze', 13, 1, 'Japones'),
 (258, 'High Score Girl', 24, 2, 'Japones'),
 (259, 'Hadi girl', 10, 1, 'Japones'),
-(260, 'Maken-Ki!', 22, 2, 'Japones'),
 (261, 'urasekai picnic', 12, 1, 'Japones'),
 (262, 'Tatoeba Last Dungeon Mae no Mura no Shounen ga Joban no Machi de Kurasu Youna Monogatari', 12, 1, 'Japones'),
 (263, 'Mushoku Tensei: Isekai Ittara Honki Dasu', 11, 1, 'Japones'),
@@ -321,11 +311,12 @@ INSERT INTO `anime` (`id_anime`, `nombre`, `cantidad_cap`, `cantidad_temp`, `tip
 (279, 'Genjitsu Shugi Yuusha no Oukoku Saikenki', 26, 1, 'Japones'),
 (280, 'Slime Taoshite 300-nen, Shiranai Uchi ni Level Max ni Nattemashita', 12, 1, 'Japones'),
 (281, 'Ijiranaide, Nagatoro-san', 12, 1, 'Japones'),
-(282, 'Mushoku Tensei: Isekai Ittara Honki Dasu', 11, 1, 'Japones'),
 (283, 'Kumo Desu ga, Nani ka?', 24, 1, 'Japones'),
 (284, 'Uzaki-chan wa Asobitai!', 12, 1, 'Japones'),
 (285, 'Shironeko Project: Zero Chronicle', 12, 1, 'Japones'),
-
+(1008, 'Kuro no Shoukanshi', 12, 1, 'Japones'),
+(1010, 'Jesus yair', 12, 1, 'Japones'),
+(1023, 'Mamahaha no Tsurego ga Motokano datta', 12, 1, 'Japones');
 
 -- --------------------------------------------------------
 
@@ -347,7 +338,8 @@ CREATE TABLE `comic` (
 
 INSERT INTO `comic` (`id_comic`, `nombre`, `cantidad_cap`, `autor`, `tipo`) VALUES
 (1, 'Solo Leveling', 179, 'Chu-Gong', 'Coreano'),
-(2, 'Komi-san wa, Komyushou Desu.', 377, 'Tomohito Oda', 'Japones');
+(2, 'Komi-san wa, Komyushou Desu.', 377, 'Tomohito Oda', 'Japones'),
+(3, 'Hell Mode: Yarikomi Suki no Gamer wa Hai-settei no Isekai de Musou suru - Hajimari no Shoukanshi', 29, 'Hamuo', 'Japones');
 
 -- --------------------------------------------------------
 
@@ -385,6 +377,20 @@ CREATE TABLE `generoanime` (
   `id_anime` int(11) NOT NULL,
   `id_genero` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `generoanime`
+--
+
+INSERT INTO `generoanime` (`id_anime`, `id_genero`) VALUES
+(2, 1),
+(2, 2),
+(2, 3),
+(2, 4),
+(2, 6),
+(2, 7),
+(2, 8),
+(2, 9);
 
 -- --------------------------------------------------------
 
@@ -427,7 +433,30 @@ CREATE TABLE `novela` (
 --
 
 INSERT INTO `novela` (`id_novela`, `nombre`, `cantidad_cap`, `autor`, `tipo`) VALUES
-(1, 'Two As One Princess', 108, 'Himezaki Shiu', 'Japones');
+(1, 'Two As One Princess', 108, 'Himezaki Shiu', 'Japones'),
+(2, 'Slow Prison Life', 49, 'Yamazaki Hibiki', 'Japones');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `id` int(11) NOT NULL,
+  `username` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `contraseña` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `rol` varchar(200) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id`, `username`, `contraseña`, `rol`) VALUES
+(1, 'Thejairex', '0cab6bbb6d8c05f06865da4ada1c20b4cccd37dbd5fafc7e1051070531c05ffb', 'Administrador'),
+(5, 'Thejairex2', '932f3c1b56257ce8539ac269d7aab42550dacf8818d075f0bdf1990562aae3ef', 'cliente'),
+(11, 'Tikki', '932f3c1b56257ce8539ac269d7aab42550dacf8818d075f0bdf1990562aae3ef', 'Administrador');
 
 --
 -- Índices para tablas volcadas
@@ -437,13 +466,15 @@ INSERT INTO `novela` (`id_novela`, `nombre`, `cantidad_cap`, `autor`, `tipo`) VA
 -- Indices de la tabla `anime`
 --
 ALTER TABLE `anime`
-  ADD PRIMARY KEY (`id_anime`);
+  ADD PRIMARY KEY (`id_anime`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
 -- Indices de la tabla `comic`
 --
 ALTER TABLE `comic`
-  ADD PRIMARY KEY (`id_comic`);
+  ADD PRIMARY KEY (`id_comic`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
 -- Indices de la tabla `genero`
@@ -475,7 +506,15 @@ ALTER TABLE `generonovela`
 -- Indices de la tabla `novela`
 --
 ALTER TABLE `novela`
-  ADD PRIMARY KEY (`id_novela`);
+  ADD PRIMARY KEY (`id_novela`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
+
+--
+-- Indices de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -485,13 +524,13 @@ ALTER TABLE `novela`
 -- AUTO_INCREMENT de la tabla `anime`
 --
 ALTER TABLE `anime`
-  MODIFY `id_anime` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1000;
+  MODIFY `id_anime` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1026;
 
 --
 -- AUTO_INCREMENT de la tabla `comic`
 --
 ALTER TABLE `comic`
-  MODIFY `id_comic` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_comic` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `genero`
@@ -503,7 +542,13 @@ ALTER TABLE `genero`
 -- AUTO_INCREMENT de la tabla `novela`
 --
 ALTER TABLE `novela`
-  MODIFY `id_novela` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_novela` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Restricciones para tablas volcadas

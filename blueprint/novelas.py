@@ -1,5 +1,5 @@
 # Librarys
-from flask import  request, Blueprint, render_template, redirect, url_for
+from flask import  request, Blueprint, render_template, redirect, flash, abort
 from flask_login import login_required
 
 # Modules
@@ -21,7 +21,9 @@ def novelasList():
 		titlePage = "Novelas - Biblioteca",
 		title = "Lista de Novelas",
 		serie = "novela",
-		th = "autor")
+		th = "autor",
+		case = "Autor",
+		addForm = "Novela")
 
 # Search novelas
 @novelas.route("/novela" , methods=['POST'])
@@ -47,3 +49,25 @@ def novela():
 				title = "{} Resultado".format(len(dataFilter)),
 				serie = "novela",
 				th = "autor")
+
+# Add comic
+@novelas.route("/api/addNovela" , methods=['POST'])
+@login_required
+def add_anime():
+	if request.method == 'POST':
+		nombre = request.form['nombre']
+		capitulos = int(request.form['capitulos'])
+		autor = request.form['Autor']
+		tipoTemp = int(request.form.get('tipo'))
+		tipo = ['Japones', 'Coreano', 'Chino']
+		tipo = tipo[tipoTemp]
+		
+		data = qNovela.add_comic(nombre,capitulos,autor,tipo)
+		if data == True:
+			flash('Se ha agregado exitosamente...')
+			return	redirect('/novelas')
+		elif data == False:
+			flash('El anime ya existe...')
+			return	redirect('/novelas')
+		else:
+			abort(500)

@@ -1,5 +1,5 @@
 # Librarys
-from flask import  request, Blueprint, render_template
+from flask import  request, Blueprint, render_template, redirect, url_for, flash, abort
 from flask_login import login_required
 
 # Modules
@@ -7,7 +7,7 @@ from querys.querysAnime import qAnime # Querys Animes
 from blueprint.Funciones import Funciones 
 
 # Init blueprint animes
-animes = Blueprint('animes', __name__, template_folder='app/templates')
+animes = Blueprint('animesList', __name__, template_folder='app/templates')
 
 # All animes
 @animes.route("/animes")
@@ -19,7 +19,10 @@ def animesList():
 		titlePage = "Animes - Biblioteca",
 		title = "Lista de Animes",
 		serie = "anime",
-		th = "Cantidad de Temporadas")
+		th = "Cantidad de Temporadas",
+		case = 'Temporadas',
+		addForm = "Anime")
+
 
 # Search animes
 @animes.route("/anime" , methods=['POST'])
@@ -45,3 +48,25 @@ def anime():
 				titlePage="Anime - Biblioteca",
 				serie = "anime",
 				th = "Cantidad de Temporadas")
+
+# Add anime
+@animes.route("/api/addAnime" , methods=['POST'])
+@login_required
+def add_anime():
+	if request.method == 'POST':
+		nombre = request.form['nombre']
+		capitulos = int(request.form['capitulos'])
+		temporadas = int(request.form['Temporadas'])
+		tipoTemp = int(request.form.get('tipo'))
+		tipo = ['Japones', 'Coreano', 'Chino']
+		tipo = tipo[tipoTemp]
+		
+		data = qAnime.add_anime(nombre,capitulos,temporadas,tipo)
+		if data == True:
+			flash('Se ha agregado exitosamente...')
+			return	redirect('/animes')
+		elif data == False:
+			flash('El anime ya existe...')
+			return	redirect('/animes')
+		else:
+			abort(500)

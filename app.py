@@ -22,10 +22,15 @@ def create_app():
 	app = Flask(__name__)
 	app.secret_key = "OtakuTeca"
 
-	app.config['MYSQL_HOST'] = "localhost"
-	app.config['MYSQL_USER'] = "root"
-	app.config['MYSQL_PASSWORD'] = ""
-	app.config['MYSQL_DB'] = "biblioteca"
+	# app.config['MYSQL_HOST'] = "localhost"
+	# app.config['MYSQL_USER'] = "root"
+	# app.config['MYSQL_PASSWORD'] = ""
+	# app.config['MYSQL_DB'] = "biblioteca"
+
+	app.config['MYSQL_HOST'] = 'Thejairex2.mysql.pythonanywhere-services.com'
+	app.config['MYSQL_USER'] = 'Thejairex2'
+	app.config['MYSQL_PASSWORD'] = 'Aiwa2015'
+	app.config['MYSQL_DB'] = 'Thejairex2$biblioteca'
 	return app
 
 app = create_app()
@@ -34,10 +39,7 @@ csrf = CSRFProtect(app)
 
 # Config Connection DDBB
 
-# app.config['MYSQL_HOST'] = 'Thejairex2.mysql.pythonanywhere-services.com'
-# app.config['MYSQL_USER'] = 'Thejairex2'
-# app.config['MYSQL_PASSWORD'] = 'Aiwa2015'
-# app.config['MYSQL_DB'] = 'Thejairex2$biblioteca'
+
 
 
 # Login
@@ -94,14 +96,7 @@ def cookies():
 		return res
 	return theme
 
-# Testing
-@pytest.fixture()
-def client():
-    return app.test_client()
 
-def test_request_example(client):
-    response = client.get("/login")
-    assert response.status_code == 200
 
 # Route Main
 @app.route("/")
@@ -128,6 +123,16 @@ app.register_blueprint(animes)
 app.register_blueprint(comics)
 app.register_blueprint(novelas)
 app.register_blueprint(registers)
+
+
+# Testing
+@pytest.fixture()
+def client():
+    return app.test_client()
+
+def test_request_example(client):
+	response = client.get("/")
+	assert response
 
 
 if __name__ == '__main__':

@@ -15,11 +15,39 @@
 
 {% block body %}
 
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar {{ serie }}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          {% include 'agregar.html' %}
+        </div>
+        
+    </div>
+</div>
+
 <div class="container-md px-3 bg-dark h-100 text-center text-light">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-info alert-dismissible my-3">
+                <strong>{{ message }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+        {% endif %}
+    {% endwith %}
     <div class="d-flex justify-content-center align-items-center mb-2">
+        
         <h2 class="m-0">{{ title }}</h2>
         {% if current_user.rol == 'Administrador' %}
-            <a href="#" class="btn btn-success ms-1"><i class="fa-solid fa-plus"></i></a>
+        <button type="button" class="btn btn-success ms-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <i class="fa-solid fa-plus"></i>
+        </button>
+            <!-- <a href="#" class="btn btn-success ms-1"></a> -->
         {% endif %}
         
     </div>
@@ -59,5 +87,5 @@
     </div>
     
 </div>
-
+<script src="{{ url_for('static', filename='js/formSerie.js') }}"></script>
 {% endblock body %}

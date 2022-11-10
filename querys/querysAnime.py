@@ -39,3 +39,17 @@ class qAnime():
         except:
             pass
 
+    @classmethod
+    def add_anime(self, nombre,capitulos,temporadas,tipo):
+        try:
+            cur = mysql.connection.cursor()
+            query = "INSERT INTO anime VALUES(null,'{}',{},{},'{}')".format(nombre,capitulos,temporadas,tipo)
+            cur.execute(query)
+            mysql.connection.commit()
+            return True
+        except Exception as e:
+            error = (1062, "Duplicate entry '{}' for key 'nombre'".format(nombre))
+            if str(error) == str(e):
+                return False
+            else: 
+                print(str(e))

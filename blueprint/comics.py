@@ -1,5 +1,5 @@
 # Library
-from flask import  request, Blueprint, render_template
+from flask import  request, Blueprint, render_template, flash, redirect, abort
 from flask_login import login_required
 
 # Modules
@@ -19,7 +19,9 @@ def comicsList():
 		titlePage = "Comics - Biblioteca",
 		title = "Lista de Comics",
 		serie = "comic",
-		th = "autor")
+		th = "Autor",
+		case = "Autor",
+		addForm = 'Comic')
 
 
 # Search Comics
@@ -36,7 +38,7 @@ def comic():
 				titlePage = "Comics - Biblioteca",
 				title = "{} Resultados".format(len(dataFilter)),
 				serie = "comic",
-				th = "autor")
+				th = "Autor")
 			
 		else:
 			return render_template("search.html", 
@@ -44,4 +46,26 @@ def comic():
 				titlePage = "Comics - Biblioteca",
 				title = "{} Resultado".format(len(dataFilter)),
 				serie = "comic",
-				th = "autor")
+				th = "Autor")
+
+# Add comic
+@comics.route("/api/addComic" , methods=['POST'])
+@login_required
+def add_anime():
+	if request.method == 'POST':
+		nombre = request.form['nombre']
+		capitulos = int(request.form['capitulos'])
+		autor = request.form['Autor']
+		tipoTemp = int(request.form.get('tipo'))
+		tipo = ['Japones', 'Coreano', 'Chino']
+		tipo = tipo[tipoTemp]
+		
+		data = qComcic.add_comic(nombre,capitulos,autor,tipo)
+		if data == True:
+			flash('Se ha agregado exitosamente...')
+			return	redirect('/comics')
+		elif data == False:
+			flash('El anime ya existe...')
+			return	redirect('/comics')
+		else:
+			abort(500)

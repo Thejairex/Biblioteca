@@ -14,6 +14,10 @@ const changeStyle = (x) => {
 
 }
 
+const changeStart = (item) => {
+    
+}
+
 let dropdowns = document.getElementById('dropdown-main')
 dropdowns.addEventListener('click', function (e) {
         var el = this.nextElementSibling

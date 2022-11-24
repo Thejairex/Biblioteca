@@ -22,17 +22,17 @@ csrf = CSRFProtect(app)
 
 # Config Connection DDBB
 
-app.config['MYSQL_HOST'] = 'Thejairex2.mysql.pythonanywhere-services.com'
-app.config['MYSQL_USER'] = 'Thejairex2'
-app.config['MYSQL_PASSWORD'] = 'Aiwa2015'
-app.config['MYSQL_DB'] = 'Thejairex2$biblioteca'
+# app.config['MYSQL_HOST'] = 'Thejairex2.mysql.pythonanywhere-services.com'
+# app.config['MYSQL_USER'] = 'Thejairex2'
+# app.config['MYSQL_PASSWORD'] = 'Aiwa2015'
+# app.config['MYSQL_DB'] = 'Thejairex2$biblioteca'
 app.secret_key = "OtakuTeca"
 
 
-# app.config['MYSQL_HOST'] = "localhost"
-# app.config['MYSQL_USER'] = "root"
-# app.config['MYSQL_PASSWORD'] = ""
-# app.config['MYSQL_DB'] = "biblioteca"
+app.config['MYSQL_HOST'] = "localhost"
+app.config['MYSQL_USER'] = "root"
+app.config['MYSQL_PASSWORD'] = ""
+app.config['MYSQL_DB'] = "biblioteca"
 
 # Login
 
@@ -109,8 +109,10 @@ def index():
 	print(current_user.username)
 	return render_template('index.html',titlePage="Biblioteca"), 200
 	
-
-	
+# Route estrillita
+@app.route('/estrellita')
+def estrellita():
+	return render_template('estrellita.html',titlePage="Biblioteca"), 200
 	
 
 # Register Blueprint

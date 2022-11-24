@@ -5,18 +5,6 @@ from querys.entities.User import User
 
 class qUser(UserMixin):
 
-    # @classmethod
-    # def findUser(self, username):
-    #         try:
-    #             cur = mysql.connection.cursor()
-    #             query = "SELECT * FROM usuario WHERE username='{}' ".format(username)
-    #             cur.execute(query)
-    #             data = cur.fetchone()
-    #             return data
-                
-    #         except Exception as e:
-    #             raise e
-        
     @classmethod
     def getUserID(self, id):
             try:
@@ -41,7 +29,7 @@ class qUser(UserMixin):
             cur.execute(query)
             data = cur.fetchone()
             if data == None:
-                return "Pachinga"
+                return None
             else:
                 if data[2] == user.password:
                     verificatedPassword = True

@@ -9,16 +9,34 @@
 <div class="container-md px-3 bg-dark h-100 text-center text-light">
 
     <h2>{{ title }}</h2>
-  
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+            {% if message == "Please log in to access this page." %}
+                <div class="alert alert-info alert-dismissible my-3">
+                    <strong>Por favor inicie sesion para acceder a esta pagina.</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% else %}
+                <div class="alert alert-info alert-dismissible my-3">
+                    <strong>{{ message }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endif %}
+            
+        {% endfor %}
+        {% endif %}
+    {% endwith %}
     <div class="d-flex justify-content-center">
         
         <form action="/api/login" method="POST" class="w-50">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-            <label for="exampleFormControlInput1" class="form-label">Username</label>
+            <input type="hidden" name="next", value="{{next}}">
+            <label for="exampleFormControlInput1" class="form-label">Nombre de Usuario</label>
             <input type="text" class="form-control mb-3" id="Username" name="username" placeholder="Username">
             <p class="formulario__input-error mb-3" id="error_Username">El usuario tiene que ser de 4 a 16 dígitos y solo puede contener numeros, letras y guion bajo.</p>
 
-            <label for="exampleFormControlInput1" class="form-label">Password</label>
+            <label for="exampleFormControlInput1" class="form-label">Contraseña</label>
             <input type="password" class="form-control mb-3" id="Password" name="password" placeholder="Password">
             <p class="formulario__input-error mb-3" id="error_Password">La contraseña tiene que ser de 8 a 24 dígitos.</p>
 

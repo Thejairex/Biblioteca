@@ -76,7 +76,10 @@
                         {% if current_user.rol == 'Administrador' %}
                         <td>
                             <a href="#" class="btn btn-info"><i class="fa-solid fa-pencil"></i></a>
-                            <a href="#" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                            <form action="/api/{{ serie }}/{{data[0]}}" method="DELETE">
+
+                            </form>
+                            <!-- <a href="/api/{{ serie }}/{{data[0]}}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a> -->
                         </td>
                         {% endif %}
                         

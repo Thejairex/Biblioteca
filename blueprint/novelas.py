@@ -16,7 +16,7 @@ novelas = Blueprint('novelas', __name__, template_folder='app/templates')
 def novelasList():
 	
 	data = qNovela.fetchall_novela()
-	return render_template("series.html", 
+	return render_template("series/series.html", 
 		datas = data, 
 		titlePage = "Novelas - Biblioteca",
 		title = "Lista de Novelas",
@@ -36,21 +36,25 @@ def novela():
 		dataFilter = Funciones.Filter(data, search) # Filter
 
 		if len(dataFilter) != 1:
-			return render_template("series.html", 
+			return render_template("series/series.html", 
 				datas = dataFilter, 
 				titlePage = "Comics - Biblioteca",
 				title = "{} Resultados".format(len(dataFilter)),
 				serie = "comic",
-				th = "autor")
+				th = "autor",
+				case = "Autor",
+				addForm = "Novela")
 		else:
-			return render_template("search.html", 
+			return render_template("series/search.html", 
 				datas=dataFilter[0],
 				titlePage = "Novelas - Biblioteca",
 				title = "{} Resultado".format(len(dataFilter)),
 				serie = "novela",
-				th = "autor")
+				th = "autor",
+				case = "Autor",
+				addForm = "Novela")
 
-# Add comic
+# Add novela
 @novelas.route("/api/addNovela" , methods=['POST'])
 @login_required
 def add_anime():
@@ -62,12 +66,41 @@ def add_anime():
 		tipo = ['Japones', 'Coreano', 'Chino']
 		tipo = tipo[tipoTemp]
 		
-		data = qNovela.add_comic(nombre,capitulos,autor,tipo)
+		data = qNovela.add_novela(nombre,capitulos,autor,tipo)
 		if data == True:
 			flash('Se ha agregado exitosamente...')
 			return	redirect('/novelas')
 		elif data == False:
-			flash('El anime ya existe...')
+			flash('La novela ya existe...')
 			return	redirect('/novelas')
 		else:
 			abort(500)
+   
+# Api novela
+@novelas.route("/api/novela/<id>" , methods=['POST','GET'])
+@login_required
+def apiAnime(id):
+    if request.method == "GET":
+        data = qNovela.delete_novela(id)
+        if data:
+            flash("Se ha eliminado exitosamente...")
+            return redirect('/novelas')
+        else:
+            print(data)
+            return redirect('/novelas')
+        
+    if request.method == "POST":
+        nombre = request.form['nombre']
+        capitulos = int(request.form['capitulos'])
+        Autor = request.form['Autor']
+        tipoTemp = int(request.form.get('tipo'))
+        tipo = ['Japones', 'Coreano', 'Chino']
+        tipo = tipo[tipoTemp]
+        
+        data = qNovela.edit_novela(id,nombre,capitulos,Autor,tipo)
+        
+        if data == True:
+            flash('Se ha editado exitosamente...')
+            return	redirect('/novelas')
+        else:
+            abort(500)

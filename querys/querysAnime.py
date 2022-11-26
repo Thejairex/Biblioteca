@@ -64,3 +64,14 @@ class qAnime():
             return True
         except Exception as e:
             print(str(e))
+    
+    @classmethod
+    def edit_anime(self, id,nombre,cap,temp, tipo):
+        try:
+            cur = mysql.connection.cursor()
+            query = "UPDATE anime SET nombre='{}', cantidad_cap={} , cantidad_temp={}, tipo='{}' WHERE id_anime = {}".format(nombre,cap,temp,tipo,id)
+            cur.execute(query)
+            mysql.connection.commit()
+            return True
+        except Exception as e:
+            print(str(e))

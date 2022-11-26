@@ -1,0 +1,42 @@
+<form action="/api/{{serie}}/{{data[0]}}" method="POST">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="Nombre{{data[0]}}" name="nombre" value="{{data[1]}}" placeholder="Nombre">
+        <p class="formulario__input-error" id="error_Nombre{{data[0]}}">El nombre tiene que ser minino de 2 dígitos.</p>
+    </div>
+    
+    <div class="mb-3">
+        <label class="form-label">Cantidad de Capitulos</label>
+        <input type="text" class="form-control" id="Capitulos{{data[0]}}" name="capitulos" placeholder="Cantidad de Capitulos" value="{{data[2]}}">
+        <p class="formulario__input-error" id="error_Capitulos{{data[0]}}">La cantidad de capitulos debe ser de 1 a 5 digitos numericos.</p>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">{{ th }}</label>
+        <input type="text" class="form-control" id="{{ case }}{{data[0]}}" name="{{ case }}" placeholder="{{ th }}" value="{{data[3]}}">
+        <p class="formulario__input-error" id="error_{{case}}{{data[0]}}">
+            {% if case == "Temporadas" %}
+                La {{ th }} debe ser de 1 a 5 digitos numericos
+            {% elif case == "Autor" %}
+                El {{ th }} tiene que ser de 1 a 40 digitos y solo puede contener letras.
+            {% endif %}
+        </p>
+    </div>
+
+    <div class="mb-3">
+        <select class="form-control form-select form-select-md mb-3" name="tipo" id="Tipo{{data[0]}}" aria-label=".form-select-md example">
+            <option selected value="">Tipo de {{ serie }}</option>
+            <option value="0">Japones</option>
+            <option value="1">Coreano</option>
+            <option value="2">Chino</option>
+        </select>
+        <p class="formulario__input-error" id="error_Tipo{{data[0]}}">Seleccione un tipo de {{ serie }} valido.</p>
+    </div>
+    
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary disabled" id="btn-form">Save changes</button>
+        </div>
+    </div>
+</form>

@@ -14,7 +14,7 @@ comics = Blueprint('comics', __name__, template_folder='app/templates')
 @login_required
 def comicsList():
 	data = qComcic.fetchall_comic()
-	return render_template("series.html", 
+	return render_template("series/series.html", 
 		datas = data, 
 		titlePage = "Comics - Biblioteca",
 		title = "Lista de Comics",
@@ -33,20 +33,24 @@ def comic():
 		data = qComcic.fetchall_comic()
 		dataFilter = Funciones.Filter(data, search) # Filter
 		if len(dataFilter) != 1:
-			return render_template("series.html", 
+			return render_template("series/series.html", 
 				datas = dataFilter, 
 				titlePage = "Comics - Biblioteca",
 				title = "{} Resultados".format(len(dataFilter)),
 				serie = "comic",
-				th = "Autor")
+				th = "Autor",
+				case = "Autor",
+				addForm = 'Comic')
 			
 		else:
-			return render_template("search.html", 
+			return render_template("series/search.html", 
 				datas=dataFilter[0],
 				titlePage = "Comics - Biblioteca",
 				title = "{} Resultado".format(len(dataFilter)),
 				serie = "comic",
-				th = "Autor")
+				th = "Autor",
+				case = "Autor",
+				addForm = 'Comic')
 
 # Add comic
 @comics.route("/api/addComic" , methods=['POST'])
@@ -65,7 +69,36 @@ def add_anime():
 			flash('Se ha agregado exitosamente...')
 			return	redirect('/comics')
 		elif data == False:
-			flash('El anime ya existe...')
+			flash('El comic ya existe...')
 			return	redirect('/comics')
 		else:
 			abort(500)
+   
+# Api anime
+@comics.route("/api/comic/<id>" , methods=['POST','GET'])
+@login_required
+def apiAnime(id):
+    if request.method == "GET":
+        data = qComcic.delete_comic(id)
+        if data:
+            flash("Se ha eliminado exitosamente...")
+            return redirect('/comics')
+        else:
+            print(data)
+            return redirect('/comics')
+        
+    if request.method == "POST":
+        nombre = request.form['nombre']
+        capitulos = int(request.form['capitulos'])
+        Autor = request.form['Autor']
+        tipoTemp = int(request.form.get('tipo'))
+        tipo = ['Japones', 'Coreano', 'Chino']
+        tipo = tipo[tipoTemp]
+        
+        data = qComcic.edit_comic(id,nombre,capitulos,Autor,tipo)
+        
+        if data == True:
+            flash('Se ha editado exitosamente...')
+            return	redirect('/comics')
+        else:
+            abort(500)

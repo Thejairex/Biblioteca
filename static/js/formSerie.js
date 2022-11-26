@@ -1,5 +1,6 @@
 const formulario = document.getElementById('formulario');
 const inputs = document.querySelectorAll('.form-control');
+const butons = document.querySelectorAll('.btn-form');
 
 
 const expresiones = {
@@ -82,8 +83,10 @@ inputs.forEach((input) => {
 
 const validadDatos = () => {
     if (campos.Nombre===true && campos.Capitulos===true && campos.Tipo===true && ( campos.Temporadas===true || campos.Autor===true ) ) {
-        document.getElementById("btn-form").classList.remove("disabled");
+        document.querySelectorAll("#btn-form").forEach(function(buton) {
+            buton.classList.remove("disabled");})
     } else {
-        document.getElementById("btn-form").classList.add("disabled");
+        document.querySelectorAll("#btn-form").forEach(function(buton) {
+            buton.classList.add("disabled");});
     }
 };

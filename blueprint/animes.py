@@ -14,7 +14,7 @@ animes = Blueprint('animesList', __name__, template_folder='app/templates')
 @login_required
 def animesList():
 	data = qAnime.fetchall_anime()
-	return render_template("series.html", 
+	return render_template("series/series.html", 
 		datas = data, 
 		titlePage = "Animes - Biblioteca",
 		title = "Lista de Animes",
@@ -34,20 +34,24 @@ def anime():
 		dataFilter = Funciones.Filter(data, search) # Filter
 
 		if len(dataFilter) != 1:
-			return render_template("series.html", 
+			return render_template("series/series.html", 
 				datas = dataFilter, 
 				titlePage = "Animes - Biblioteca",
 				title = "{} Resultados".format(len(dataFilter)),
 				serie = "anime",
-				th = "Cantidad de Temporadas")
+				th = "Cantidad de Temporadas",
+				case = 'Temporadas',
+				addForm = "Anime")
 
 		else:
-			return render_template("search.html", 
-				datas=dataFilter[0],
+			return render_template("series/search.html", 
+				data=dataFilter[0],
 				title = "{} Resultado".format(len(dataFilter)),
 				titlePage="Anime - Biblioteca",
 				serie = "anime",
-				th = "Cantidad de Temporadas")
+				th = "Cantidad de Temporadas",
+				case = 'Temporadas',
+				addForm = "Anime")
 
 # Add anime
 @animes.route("/api/addAnime" , methods=['POST'])
@@ -72,15 +76,30 @@ def add_anime():
 			abort(500)
 
 # Api anime
-@animes.route("/api/anime/<id>" , methods=['POST','GET','DELETE'])
+@animes.route("/api/anime/<id>" , methods=['POST','GET'])
 @login_required
 def apiAnime(id):
-    if request.method == "DELETE":
+    if request.method == "GET":
         data = qAnime.delete_anime(id)
         if data:
-            return redirect(url_for('animes'))
-        
+            flash("Se ha eliminado exitosamente...")
+            return redirect('/animes')
         else:
             print(data)
-            return redirect(url_for('animes'))
-            
+            return redirect('/animes')
+        
+    if request.method == "POST":
+        nombre = request.form['nombre']
+        capitulos = int(request.form['capitulos'])
+        temporadas = int(request.form['Temporadas'])
+        tipoTemp = int(request.form.get('tipo'))
+        tipo = ['Japones', 'Coreano', 'Chino']
+        tipo = tipo[tipoTemp]
+        
+        data = qAnime.edit_anime(id,nombre,capitulos,temporadas,tipo)
+        
+        if data == True:
+            flash('Se ha editado exitosamente...')
+            return	redirect('/animes')
+        else:
+            abort(500)

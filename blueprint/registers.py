@@ -1,5 +1,5 @@
 # Librarys
-from flask import  request, Blueprint, render_template, redirect, url_for
+from flask import  request, Blueprint, render_template, redirect, url_for, flash
 from flask_login import login_required, current_user
 import hashlib
 
@@ -37,6 +37,6 @@ def api_register():
 			rol = 'Cliente'
 
 		data = qUser.registerUser(username,password,rol)
-		
+		flash('Se ha regriado correctamente')
 		return redirect(url_for('registers.register'))
 		

@@ -7,7 +7,16 @@
 {% block body %}
 
 <div class="container-md px-3 bg-dark h-100 text-center text-light">
-
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-info alert-dismissible my-3">
+                <strong>{{ message }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+        {% endif %}
+    {% endwith %}
     <h2>{{ title }}</h2>
   
     <div class="d-flex justify-content-center">

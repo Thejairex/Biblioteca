@@ -1,0 +1,108 @@
+{% extends "layout.html" %}
+
+{% block titlePage %}
+{{ titlePage }}
+{% endblock titlePage %}
+
+{% block searchBox %}
+<form class="d-flex" role="search" action="/{{serie}}" method="POST">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input class="form-control me-2" type="search" name="search" placeholder="Buscar" aria-label="Search">
+    <button class="btn btn-outline-success" type="submit">Buscar</button>
+</form>
+
+{% endblock searchBox %}
+
+{% block body %}
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar {{ serie }}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          {% include 'series/includes/agregar.html' %}
+        </div>
+        
+    </div>
+</div>
+
+<div class="container-md px-3 bg-dark h-100 text-center text-light">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-info alert-dismissible my-3">
+                <strong>{{ message }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <div class="d-flex justify-content-center align-items-center mb-2">
+        
+        <h2 class="m-0">{{ title }}</h2>
+        {% if current_user.rol == 'Administrador' %}
+        <button type="button" class="btn btn-success ms-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <i class="fa-solid fa-plus"></i>
+        </button>
+            <!-- <a href="#" class="btn btn-success ms-1"></a> -->
+        {% endif %}
+        
+    </div>
+    
+    <div class=" tabla fixTableHead">
+        <table class="table table-striped">
+            <thead class="bg-primary">
+                <th class="bg-primary">ID</th>
+                <th class="bg-primary">Nombre</th>
+                <th class="bg-primary">Cantidad de Capitulos</th>
+                <th class="bg-primary">{{ th }}</th>
+                <th class="bg-primary">Tipo</th>
+                {% if current_user.rol == 'Administrador' %}
+                    <th class="bg-primary">Acciones</th></th>
+                {% endif %}
+                
+            </thead>
+            <tbody>
+                {% for data in datas%}
+                    <tr>
+                        <td>{{data[0]}}</td>
+                        <td>{{data[1]}}</td>
+                        <td>{{data[2]}}</td>
+                        <td>{{data[3]}}</td>
+                        <td>{{data[4]}}</td>
+                        {% if current_user.rol == 'Administrador' %}
+                        <td>
+                            <div class="modal fade" id="modelAnime{{data[0]}}" tabindex="-1" aria-labelledby="modelAnime{{data[0]}}Label" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h1 class="modal-title fs-5" id="modelAnime{{data[0]}}Label">Editar {{ serie }}</h1>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                      {% include 'series/includes/editar.html' %}
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-info ms-1" data-bs-toggle="modal" data-bs-target="#modelAnime{{data[0]}}">
+                                <i class="fa-solid fa-pencil"></i>
+                            </button>
+                            <form action="/api/{{ serie }}/{{data[0]}}" method="GET">
+                                <button type="submit" class="btn btn-danger ms-1 my-1"><i class="fa-solid fa-trash"></i></button>
+                            </form>
+                        </td>
+                        {% endif %}
+                        
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+<script src="{{ url_for('static', filename='js/formSerie.js') }}"></script>
+{% endblock body %}

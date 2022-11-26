@@ -10,7 +10,6 @@
     <input class="form-control me-2" type="search" name="search" placeholder="Buscar" aria-label="Search">
     <button class="btn btn-outline-success" type="submit">Buscar</button>
 </form>
-
 {% endblock searchBox %}
 
 {% block body %}
@@ -23,13 +22,13 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          {% include 'agregar.html' %}
+          {% include 'series/includes/agregar.html' %}
         </div>
         
     </div>
 </div>
 
-<div class="container-md px-3 bg-dark h-100 text-center text-light">
+<div class="container-md px-3 bg-dark h-100 text-center text-light ">
     {% with messages = get_flashed_messages() %}
         {% if messages %}
         {% for message in messages %}
@@ -51,7 +50,6 @@
         {% endif %}
         
     </div>
-    
     <div class=" tabla fixTableHead">
         <table class="table table-striped">
             <thead class="bg-primary">
@@ -63,32 +61,45 @@
                 {% if current_user.rol == 'Administrador' %}
                     <th class="bg-primary">Acciones</th></th>
                 {% endif %}
-                
             </thead>
             <tbody>
-                {% for data in datas%}
-                    <tr>
-                        <td>{{data[0]}}</td>
-                        <td>{{data[1]}}</td>
-                        <td>{{data[2]}}</td>
-                        <td>{{data[3]}}</td>
-                        <td>{{data[4]}}</td>
-                        {% if current_user.rol == 'Administrador' %}
+                <tr>
+                    <td>{{data[0]}}</td>
+                    <td>{{data[1]}}</td>
+                    <td>{{data[2]}}</td>
+                    <td>{{data[3]}}</td>
+                    <td>{{data[4]}}</td>
+                    {% if current_user.rol == 'Administrador' %}
                         <td>
-                            <a href="#" class="btn btn-info"><i class="fa-solid fa-pencil"></i></a>
-                            <form action="/api/{{ serie }}/{{data[0]}}" method="DELETE">
-
+                            <div class="modal fade" id="modelAnime{{data[0]}}" tabindex="-1" aria-labelledby="modelAnime{{data[0]}}Label" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h1 class="modal-title fs-5" id="modelAnime{{data[0]}}Label">Editar {{ serie }}</h1>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                      {% include 'series/includes/editar.html' %}
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-info ms-1" data-bs-toggle="modal" data-bs-target="#modelAnime{{data[0]}}">
+                                <i class="fa-solid fa-pencil"></i>
+                            </button>
+                            <form action="/api/{{ serie }}/{{data[0]}}" method="GET">
+                                <button type="submit" class="btn btn-danger ms-1 my-1"><i class="fa-solid fa-trash"></i></button>
                             </form>
-                            <!-- <a href="/api/{{ serie }}/{{data[0]}}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a> -->
                         </td>
                         {% endif %}
                         
                     </tr>
-                {% endfor %}
+                </tr>
             </tbody>
         </table>
     </div>
     
 </div>
 <script src="{{ url_for('static', filename='js/formSerie.js') }}"></script>
+
 {% endblock body %}

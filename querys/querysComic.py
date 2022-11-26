@@ -39,3 +39,25 @@ class qComcic():
                 return False
             else: 
                 print(str(e))
+                
+    @classmethod
+    def delete_comic(self,id):
+        try:
+            cur = mysql.connection.cursor()
+            query = "DELETE FROM comic WHERE id_comic = {}".format(id)
+            cur.execute(query)
+            mysql.connection.commit()
+            return True
+        except Exception as e:
+            print(str(e))
+    
+    @classmethod
+    def edit_comic(self, id,nombre,cap,autor, tipo):
+        try:
+            cur = mysql.connection.cursor()
+            query = "UPDATE comic SET nombre='{}', cantidad_cap={} , autor='{}', tipo='{}' WHERE id_comic = {}".format(nombre,cap,autor,tipo,id)
+            cur.execute(query)
+            mysql.connection.commit()
+            return True
+        except Exception as e:
+            print(str(e))

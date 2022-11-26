@@ -114,6 +114,14 @@ def index():
 def estrellita():
 	return render_template('estrellita.html',titlePage="Biblioteca"), 200
 	
+# App errorhandle
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html', titlePage="Not Found"), 404
+
+@app.errorhandler(500)
+def error_internal_server(e):
+    return render_template('500.html', titlePage="Error Internal Server"), 500
 
 # Register Blueprint
 app.register_blueprint(animes)

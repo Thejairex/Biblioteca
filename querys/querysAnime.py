@@ -53,3 +53,14 @@ class qAnime():
                 return False
             else: 
                 print(str(e))
+                
+    @classmethod
+    def delete_anime(self,id):
+        try:
+            cur = mysql.connection.cursor()
+            query = "DELETE FROM anime WHERE id_anime = {}".format(id)
+            cur.execute(query)
+            mysql.connection.commit()
+            return True
+        except Exception as e:
+            print(str(e))

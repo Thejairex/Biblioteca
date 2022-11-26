@@ -70,3 +70,17 @@ def add_anime():
 			return	redirect('/animes')
 		else:
 			abort(500)
+
+# Api anime
+@animes.route("/api/anime/<id>" , methods=['POST','GET','DELETE'])
+@login_required
+def apiAnime(id):
+    if request.method == "DELETE":
+        data = qAnime.delete_anime(id)
+        if data:
+            return redirect(url_for('animes'))
+        
+        else:
+            print(data)
+            return redirect(url_for('animes'))
+            

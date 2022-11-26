@@ -14,8 +14,18 @@ const changeStyle = (x) => {
 
 }
 
-const changeStart = (item) => {
-    
+const changeStar = (item) => {
+    console.log(item.id);
+    let contador = item.id;
+
+    for (let i = 0; i < 5; i++) {
+        if (i<contador) {
+            document.getElementById(i+1).style.color="orange";
+        } else {
+            document.getElementById(i+1).style.color="black";
+        }
+        
+    }
 }
 
 let dropdowns = document.getElementById('dropdown-main')

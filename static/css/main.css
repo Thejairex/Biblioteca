@@ -44,3 +44,7 @@ body::-webkit-scrollbar-thumb:hover {
 .formulario__input-error-activo {
 	display: block;
 }
+
+.star {
+  cursor: pointer;
+}

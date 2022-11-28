@@ -28,7 +28,7 @@
     </div>
 </div>
 
-<div class="container-md px-3 bg-dark h-100 text-center text-light ">
+<div class="container-md px-3 bg-dark h-100 text-center text-light bg-gradient">
     {% with messages = get_flashed_messages() %}
         {% if messages %}
         {% for message in messages %}
@@ -98,7 +98,8 @@
             </tbody>
         </table>
     </div>
-    
+    <h2 class="text-start my-2">Comentarios</h2>
+    {% include 'series/includes/disqus.html' %}
 </div>
 <script src="{{ url_for('static', filename='js/formSerie.js') }}"></script>
 

@@ -1,6 +1,6 @@
 # Librarys
 from flask import  request, Blueprint, render_template, redirect, url_for, flash, abort
-from flask_login import login_required
+from flask_login import login_required, current_user
 
 # Modules
 from querys.querysAnime import qAnime # Querys Animes
@@ -57,49 +57,56 @@ def anime():
 @animes.route("/api/addAnime" , methods=['POST'])
 @login_required
 def add_anime():
-	if request.method == 'POST':
-		nombre = request.form['nombre']
-		capitulos = int(request.form['capitulos'])
-		temporadas = int(request.form['Temporadas'])
-		tipoTemp = int(request.form.get('tipo'))
-		tipo = ['Japones', 'Coreano', 'Chino']
-		tipo = tipo[tipoTemp]
-		
-		data = qAnime.add_anime(nombre,capitulos,temporadas,tipo)
-		if data == True:
-			flash('Se ha agregado exitosamente...')
-			return	redirect('/animes')
-		elif data == False:
-			flash('El anime ya existe...')
-			return	redirect('/animes')
-		else:
-			abort(500)
+	if current_user.rol == 'Administrador':
+		if request.method == 'POST':
+			nombre = request.form['nombre']
+			capitulos = int(request.form['capitulos'])
+			temporadas = int(request.form['Temporadas'])
+			tipoTemp = int(request.form.get('tipo'))
+			tipo = ['Japones', 'Coreano', 'Chino']
+			tipo = tipo[tipoTemp]
+			
+			data = qAnime.add_anime(nombre,capitulos,temporadas,tipo)
+			if data == True:
+				flash('Se ha agregado exitosamente...')
+				return	redirect('/animes')
+			elif data == False:
+				flash('El anime ya existe...')
+				return	redirect('/animes')
+			else:
+				abort(500)
+	else:
+		abort(401)
+
 
 # Api anime
 @animes.route("/api/anime/<id>" , methods=['POST','GET'])
 @login_required
 def apiAnime(id):
-    if request.method == "GET":
-        data = qAnime.delete_anime(id)
-        if data:
-            flash("Se ha eliminado exitosamente...")
-            return redirect('/animes')
-        else:
-            print(data)
-            return redirect('/animes')
-        
-    if request.method == "POST":
-        nombre = request.form['nombre']
-        capitulos = int(request.form['capitulos'])
-        temporadas = int(request.form['Temporadas'])
-        tipoTemp = int(request.form.get('tipo'))
-        tipo = ['Japones', 'Coreano', 'Chino']
-        tipo = tipo[tipoTemp]
-        
-        data = qAnime.edit_anime(id,nombre,capitulos,temporadas,tipo)
-        
-        if data == True:
-            flash('Se ha editado exitosamente...')
-            return	redirect('/animes')
-        else:
-            abort(500)
+	if current_user.rol == 'Administrador':
+		if request.method == "GET":
+			data = qAnime.delete_anime(id)
+			if data:
+				flash("Se ha eliminado exitosamente...")
+				return redirect('/animes')
+			else:
+				print(data)
+				return redirect('/animes')
+			
+		if request.method == "POST":
+			nombre = request.form['nombre']
+			capitulos = int(request.form['capitulos'])
+			temporadas = int(request.form['Temporadas'])
+			tipoTemp = int(request.form.get('tipo'))
+			tipo = ['Japones', 'Coreano', 'Chino']
+			tipo = tipo[tipoTemp]
+			
+			data = qAnime.edit_anime(id,nombre,capitulos,temporadas,tipo)
+			
+			if data == True:
+				flash('Se ha editado exitosamente...')
+				return	redirect('/animes')
+			else:
+				abort(500)
+	else:
+		abort(401)

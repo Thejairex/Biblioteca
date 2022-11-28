@@ -107,12 +107,12 @@ def logout():
 @login_required
 def index():
 	print(current_user.username)
-	return render_template('index.html',titlePage="Biblioteca"), 200
+	return render_template('index.html',titlePage="Bibliotaku"), 200
 	
 # Route estrillita
 @app.route('/estrellita')
 def estrellita():
-	return render_template('estrellita.html',titlePage="Biblioteca"), 200
+	return render_template('estrellita.html',titlePage="Bibliotaku - estrellita"), 200
 	
 # App errorhandle
 @app.errorhandler(404)

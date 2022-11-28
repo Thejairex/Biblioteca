@@ -17,7 +17,7 @@ def comicsList():
     data = qComcic.fetchall_comic()
     return render_template("series/series.html", 
 		datas = data, 
-		titlePage = "Comics - Biblioteca",
+		titlePage = "Bibliotaku - Comics",
 		title = "Lista de Comics",
 		serie = "comic",
 		th = "Autor",
@@ -36,7 +36,7 @@ def comic():
 		if len(dataFilter) != 1:
 			return render_template("series/series.html", 
 				datas = dataFilter, 
-				titlePage = "Comics - Biblioteca",
+				titlePage = "Bibliotaku - Comics",
 				title = "{} Resultados".format(len(dataFilter)),
 				serie = "comic",
 				th = "Autor",
@@ -46,7 +46,7 @@ def comic():
 		else:
 			return render_template("series/search.html", 
 				data=dataFilter[0],
-				titlePage = "Comics - Biblioteca",
+				titlePage = "Bibliotaku - Comic",
 				title = "{} Resultado".format(len(dataFilter)),
 				serie = "comic",
 				th = "Autor",

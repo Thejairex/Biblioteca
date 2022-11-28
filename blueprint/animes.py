@@ -16,7 +16,7 @@ def animesList():
 	data = qAnime.fetchall_anime()
 	return render_template("series/series.html", 
 		datas = data, 
-		titlePage = "Animes - Biblioteca",
+		titlePage = "Bibliotaku - Animes",
 		title = "Lista de Animes",
 		serie = "anime",
 		th = "Cantidad de Temporadas",
@@ -36,7 +36,7 @@ def anime():
 		if len(dataFilter) != 1:
 			return render_template("series/series.html", 
 				datas = dataFilter, 
-				titlePage = "Animes - Biblioteca",
+				titlePage = "Bibliotaku - Animes",
 				title = "{} Resultados".format(len(dataFilter)),
 				serie = "anime",
 				th = "Cantidad de Temporadas",
@@ -47,7 +47,7 @@ def anime():
 			return render_template("series/search.html", 
 				data=dataFilter[0],
 				title = "{} Resultado".format(len(dataFilter)),
-				titlePage="Anime - Biblioteca",
+				titlePage="Bibliotaku - Anime",
 				serie = "anime",
 				th = "Cantidad de Temporadas",
 				case = 'Temporadas',

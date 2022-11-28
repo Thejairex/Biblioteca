@@ -17,7 +17,7 @@ registers = Blueprint('registers', __name__, template_folder='app/templates')
 def register():
 	if current_user.rol == 'Administrador':
 		return render_template('registro.html',
-		titlePage = "Registro",
+		titlePage = "Bibliotaku - Registro",
 		title = "Registrar nueva cuenta")
 	else:
 		return render_template('404.html',

@@ -18,7 +18,7 @@ def novelasList():
 	data = qNovela.fetchall_novela()
 	return render_template("series/series.html", 
 		datas = data, 
-		titlePage = "Novelas - Biblioteca",
+		titlePage = "Bibliotaku - Novelas",
 		title = "Lista de Novelas",
 		serie = "novela",
 		th = "autor",
@@ -39,7 +39,7 @@ def novela():
 		if len(dataFilter) != 1:
 			return render_template("series/series.html", 
 				datas = dataFilter, 
-				titlePage = "Comics - Biblioteca",
+				titlePage = "Bibliotaku - Novelas",
 				title = "{} Resultados".format(len(dataFilter)),
 				serie = "comic",
 				th = "autor",
@@ -48,7 +48,7 @@ def novela():
 		else:
 			return render_template("series/search.html", 
 				data=dataFilter[0],
-				titlePage = "Novelas - Biblioteca",
+				titlePage = "Bibliotaku - Novela",
 				title = "{} Resultado".format(len(dataFilter)),
 				serie = "novela",
 				th = "autor",

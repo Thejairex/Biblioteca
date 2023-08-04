@@ -5,6 +5,18 @@
 {% include 'layouts/navbar.html' %}
 
 <main class=" m-0 p-5 ">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-dismissible alert-danger">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <strong>{{message}}</strong>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
+
     <h2 class=" text-light">Añadir objeto</h2>
     <form action="/api/add_{{type}}" method="POST" enctype="multipart/form-data">
         <div class="mb-3">
@@ -13,7 +25,8 @@
                 name="name" id="id_name">
         </div>
 
-        <select class="form-select form-select-lg mb-3" name="type" aria-label="Large select example">
+        <select class="form-select form-select-lg mb-3" name="type"
+            aria-label="Large select example">
             <option selected>Tipo</option>
             <option value="1">Novela Web JP</option>
             <option value="2">Novela Web KR</option>
@@ -23,13 +36,14 @@
             <option value="6">Novela Ligera CH</option>
         </select>
 
-        <select class="form-select form-select-lg mb-3" name="status" aria-label="Large select example">
+        <select class="form-select form-select-lg mb-3" name="status"
+            aria-label="Large select example">
             <option selected>Estado</option>
             <option value="1">Finalizado</option>
             <option value="2">En Lectura</option>
             <option value="3">En Hiatus</option>
             <option value="4">Sin Empezar</option>
-          </select>
+        </select>
 
         <div class="mb-3">
             <label for="id_shop_level" class="control">Puntuacion General</label>
@@ -38,11 +52,12 @@
         </div>
 
         <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="1" name="favorite" id="flexCheckDefault">
+            <input class="form-check-input" type="checkbox" value="1"
+                name="favorite" id="flexCheckDefault">
             <label class="form-check-label" for="flexCheckDefault">
-              Favorito?
+                Favorito?
             </label>
-          </div>
+        </div>
         <input type="submit" value="Agregar {{type}}" class="btn btn-dark">
     </form>
 </main>

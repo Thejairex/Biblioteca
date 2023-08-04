@@ -3,6 +3,7 @@ from flask import *
 from db import Db
 
 app = Flask(__name__)
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 db = Db()
 
 
@@ -41,8 +42,13 @@ def add_novela():
     score = float(request.form["score"])
     favorite = int(request.form["favorite"])
 
-    return f"nombre: {name}, tipo: {type}, status: {state}, score: {score}, favorito: {favorite}"
+    result, reason = db.insert(table="NOVELS", values=(name, type, state, score, favorite))
+    if result:
+        return redirect(url_for("novelas"))
+    else:
+        flash(reason)
+        return redirect(url_for("new_novel"))
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)

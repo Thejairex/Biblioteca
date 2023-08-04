@@ -4,7 +4,6 @@
 
 {% include 'layouts/navbar.html' %}
 <main>
-    <a href="/novelas/new" class="btn btn-success"> + </a>
     <table class="table table-hover table-striped-columns">
         <thead>
             <th scope="col">#</th>
@@ -22,7 +21,11 @@
                 <td>{{data[2]}}</td>
                 <td>{{data[3]}}</td>
                 <td>{{data[4]}}</td>
-                <td>{{data[5]}}</td>
+                {% if data[5] == 1 %}
+                <td>Si</td>
+                {% else %}
+                <td>No</td>
+                {% endif %}
             </tr>
             {% endfor %}
         </tbody>

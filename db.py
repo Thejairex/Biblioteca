@@ -41,12 +41,19 @@ class Db:
         return columnas_str, placeholders
     
     def insert(self, table: str, values):
-        conn, cur = self.init_thread()
-        columnas, placeholders = self.table_info(table, cur)
-        query = f"INSERT INTO {table} ({columnas}) VALUES ({placeholders})"
-        cur.execute(query, values)
-        conn.commit()
-        conn.close()
+        try:
+            conn, cur = self.init_thread()
+            columnas, placeholders = self.table_info(table, cur)
+            query = f"INSERT INTO {table} ({columnas}) VALUES ({placeholders})"
+            cur.execute(query, values)
+            conn.commit()
+            conn.close()
+            return True, None
+        
+        except Exception as e:
+            print(str(f"Ocurrio este erorr: '{e}'"))
+            if str(e) == "UNIQUE constraint failed: NOVELS.name":
+                return False, "La Novela ya se ha agregado."
         
     def insert_many(self, table: str, values):
         columnas, placeholders = self.table_info(table)

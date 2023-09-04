@@ -15,8 +15,10 @@ class Db:
                                  name VARCHAR(500) UNIQUE,
                                  type VARCHAR(100),
                                  status VARCHAR(100),
+                                 my_status VARCHAR(100),
                                  score FLOAT,
-                                 favorite INTEGER)""")
+                                 favorite INTEGER,
+                                 link VARCHAR(1000))""")
                                  
                                  
             self.conn.commit()

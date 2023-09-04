@@ -38,26 +38,42 @@
 
         <select class="form-select form-select-lg mb-3" name="status"
             aria-label="Large select example">
-            <option selected>Estado</option>
+            <option selected>Estado de Novela</option>
+            <option value="1">Completado</option>
+            <option value="2">En Emision</option>
+            <option value="3">En Hiatus</option>
+            <option value="4">Droppeado</option>
+        </select>
+        
+        <select class="form-select form-select-lg mb-3" name="my_status"
+            aria-label="Large select example">
+            <option selected>Mi Estado</option>
             <option value="1">Finalizado</option>
             <option value="2">En Lectura</option>
             <option value="3">En Hiatus</option>
             <option value="4">Sin Empezar</option>
+            <option value="5">Droppeado</option>
         </select>
-
+        
         <div class="mb-3">
             <label for="id_shop_level" class="control">Puntuacion General</label>
             <input type="text" class="form-control rounded bg-dark text-light"
                 name="score" id="id_shop_level">
         </div>
 
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="1"
-                name="favorite" id="flexCheckDefault">
+        <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" value="1" 
+                name="favorite" id="flexCheckDefault" >
             <label class="form-check-label" for="flexCheckDefault">
                 Favorito?
             </label>
         </div>
+        <div class="mb-3">
+            <label for="id_link" class="control">Link de Novela</label>
+            <input type="text" class="form-control rounded bg-dark text-light"
+                name="link" id="id_link">
+        </div>
+
         <input type="submit" value="Agregar {{type}}" class="btn btn-dark">
     </form>
 </main>

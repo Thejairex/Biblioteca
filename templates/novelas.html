@@ -10,8 +10,10 @@
             <th scope="col">Nombre</th>
             <th scope="col">Tipo</th>
             <th scope="col">Estado</th>
+            <th scope="col">Mi Estado</th>
             <th scope="col">Puntuacion General</th>
             <th scope="col">Favorita</th>
+            <th scope="col">Links</th>
         </thead>
         <tbody>
             {% for data in datas %}
@@ -21,11 +23,13 @@
                 <td>{{data[2]}}</td>
                 <td>{{data[3]}}</td>
                 <td>{{data[4]}}</td>
-                {% if data[5] == 1 %}
+                <td>{{data[5]}}</td>
+                {% if data[6] == 1 %}
                 <td>Si</td>
                 {% else %}
                 <td>No</td>
                 {% endif %}
+                <td><a href="{{data[7]}}">Ver Novela</a></td>
             </tr>
             {% endfor %}
         </tbody>

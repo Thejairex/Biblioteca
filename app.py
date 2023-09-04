@@ -32,17 +32,26 @@ def add_novela():
              "Novela Ligera KR",
              "Novela Ligera CH"]
     
-    status = ["Finalizado", "En Lectura" , "En Hiatus", "Sin Empezar"]
+    status = ["Completado", "En Emision" , "En Hiatus", "Droppeado"]
+    status2 = ["Finalizado", "En Lectura" , "En Hiatus", "Sin Empezar", "Droppeado"]
 
     name = str(request.form["name"])
     type = int(request.form["type"])
     type = types[type-1]
     state = int(request.form["status"])
     state = status[state-1]
+    my_state = int(request.form["my_status"])
+    my_state = status2[my_state-1]
+    
     score = float(request.form["score"])
-    favorite = int(request.form["favorite"])
-
-    result, reason = db.insert(table="NOVELS", values=(name, type, state, score, favorite))
+    if request.form.get('favorite') == None:
+        favorite = 0
+    else:
+        favorite = request.form["favorite"]
+    
+    link = str(request.form["link"])
+    
+    result, reason = db.insert(table="NOVELS", values=(name, type, state, my_state, score, favorite, link))
     if result:
         return redirect(url_for("novelas"))
     else:
@@ -51,4 +60,4 @@ def add_novela():
 
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=True)
